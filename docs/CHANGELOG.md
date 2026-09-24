@@ -12,3 +12,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Pure Watch Face Format baseline project structure (Gradle 8.9 + AGP 8.5.2).
 - Minimal valid WFF `watchface.xml` displaying digital time (hours, minutes, and ambient-reactive seconds).
 - Verified initial compilation with `./gradlew assembleDebug` (outputs `app-debug.apk`).
+- Successfully paired, connected via Wi-Fi ADB, and deployed `app-debug.apk` to the Pixel Watch 3 (`com.sicos.watchface.debug`).
