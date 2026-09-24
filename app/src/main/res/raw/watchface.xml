@@ -1,0 +1,25 @@
+<WatchFace width="450" height="450" clipShape="CIRCLE">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+    <Metadata key="PREVIEW_TIME" value="10:09:30" />
+
+    <!-- Visual layout scene -->
+    <Scene backgroundColor="#ff000000">
+        <!-- Digital Clock Display: Hours & Minutes -->
+        <DigitalClock x="25" y="160" width="400" height="130">
+            <TimeText format="hh:mm" align="CENTER" x="0" y="0" width="400" height="130">
+                <Font family="SYNC_TO_DEVICE" size="92" color="#ffffffff" weight="BOLD" />
+            </TimeText>
+        </DigitalClock>
+
+        <!-- Digital Clock Display: Seconds (Active mode only) -->
+        <PartText x="25" y="275" width="400" height="40">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="24" color="#ff00e5ff" weight="MEDIUM">
+                    <Template>%02d</Template>
+                    <Parameter expression="[SECOND]" />
+                </Font>
+            </Text>
+        </PartText>
+    </Scene>
+</WatchFace>
