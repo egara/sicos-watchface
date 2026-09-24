@@ -1,25 +1,97 @@
 <WatchFace width="450" height="450" clipShape="CIRCLE">
-    <Metadata key="CLOCK_TYPE" value="DIGITAL" />
-    <Metadata key="PREVIEW_TIME" value="10:09:30" />
+    <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
+    <Metadata key="PREVIEW_TIME" value="10:10:30"/>
 
-    <!-- Visual layout scene -->
-    <Scene backgroundColor="#ff000000">
-        <!-- Digital Clock Display: Hours & Minutes -->
-        <DigitalClock x="25" y="160" width="400" height="130">
-            <TimeText format="hh:mm" align="CENTER" x="0" y="0" width="400" height="130">
-                <Font family="SYNC_TO_DEVICE" size="92" color="#ffffffff" weight="BOLD" />
+    <!-- Gruvbox Material Dark Background: #282828 -->
+    <Scene backgroundColor="#ff282828">
+
+        <!-- ======================================================== -->
+        <!-- TOP METRICS ROW (Heart Rate, Steps, Battery)             -->
+        <!-- ======================================================== -->
+        <Group x="0" y="65" width="450" height="90" name="top_metrics">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+
+            <!-- Column 1: Heart Rate (Gruvbox Red #ea6962) -->
+            <PartImage x="80" y="0" width="30" height="30">
+                <Image resource="ic_heart"/>
+            </PartImage>
+            <PartText x="45" y="38" width="100" height="35">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="24" color="#ffd4be98">
+                        <Template>%d</Template>
+                        <Parameter expression="[HEART_RATE] &gt; 0 ? [HEART_RATE] : 72"/>
+                    </Font>
+                </Text>
+            </PartText>
+
+            <!-- Column 2: Steps (Gruvbox Blue #7daea3) -->
+            <PartImage x="210" y="0" width="30" height="30">
+                <Image resource="ic_steps"/>
+            </PartImage>
+            <PartText x="165" y="38" width="120" height="35">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="24" color="#ffd4be98">
+                        <Template>%d</Template>
+                        <Parameter expression="[STEP_COUNT]"/>
+                    </Font>
+                </Text>
+            </PartText>
+
+            <!-- Column 3: Battery (Gruvbox Green #a9b665) -->
+            <PartImage x="340" y="0" width="30" height="30">
+                <Image resource="ic_battery"/>
+            </PartImage>
+            <PartText x="295" y="38" width="120" height="35">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="24" color="#ffd4be98">
+                        <Template>%d%%</Template>
+                        <Parameter expression="[BATTERY_PERCENT]"/>
+                    </Font>
+                </Text>
+            </PartText>
+        </Group>
+
+        <!-- ======================================================== -->
+        <!-- CENTER: LCD 7-SEGMENT DIGITAL CLOCK                      -->
+        <!-- ======================================================== -->
+
+        <!-- Inactive Background Segments (Ghost "88:88") for LCD effect -->
+        <PartText x="25" y="168" width="400" height="110">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <Text align="CENTER">
+                <Font family="dseg7_classic_bold" size="86" color="#ff32302f">88:88</Font>
+            </Text>
+        </PartText>
+
+        <!-- Active Clock Display (Hours & Minutes in Gruvbox Cream/Yellow #d4be98) -->
+        <DigitalClock x="25" y="168" width="400" height="110">
+            <TimeText format="hh:mm" align="CENTER" x="0" y="0" width="400" height="110">
+                <Font family="dseg7_classic_bold" size="86" color="#ffd4be98"/>
             </TimeText>
         </DigitalClock>
 
-        <!-- Digital Clock Display: Seconds (Active mode only) -->
-        <PartText x="25" y="275" width="400" height="40">
-            <Variant mode="AMBIENT" target="alpha" value="0" />
+        <!-- ======================================================== -->
+        <!-- HORIZONTAL DIVIDER LINE                                  -->
+        <!-- ======================================================== -->
+        <PartDraw x="90" y="295" width="270" height="4">
+            <Line startX="0" startY="2" endX="270" endY="2">
+                <Stroke color="#ffd4be98" thickness="3" cap="ROUND"/>
+            </Line>
+        </PartDraw>
+
+        <!-- ======================================================== -->
+        <!-- BOTTOM: FULL DATE (14-SEGMENT LCD: e.g. "THU FEB 24")    -->
+        <!-- ======================================================== -->
+        <PartText x="25" y="318" width="400" height="60">
             <Text align="CENTER">
-                <Font family="SYNC_TO_DEVICE" size="24" color="#ff00e5ff" weight="MEDIUM">
-                    <Template>%02d</Template>
-                    <Parameter expression="[SECOND]" />
+                <Font family="dseg14_classic_bold" size="30" color="#ffd4be98">
+                    <Template>%s %s %02d</Template>
+                    <Parameter expression="[DAY_OF_WEEK_S]"/>
+                    <Parameter expression="[MONTH_S]"/>
+                    <Parameter expression="[DAY]"/>
                 </Font>
             </Text>
         </PartText>
+
     </Scene>
 </WatchFace>
