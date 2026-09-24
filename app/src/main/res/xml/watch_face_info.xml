@@ -1,0 +1,8 @@
+<WatchFaceInfo>
+    <Preview value="@drawable/watch_preview" />
+    <Category value="CATEGORY_EMPTY" />
+    <AvailableInRetail value="true" />
+    <MultipleInstancesAllowed value="true" />
+    <Editable value="true" />
+    <FlavorsSupported value="false" />
+</WatchFaceInfo>
