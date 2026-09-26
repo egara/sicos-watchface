@@ -46,8 +46,14 @@
         </ListConfiguration>
     </UserConfigurations>
 
-    <Scene backgroundColor="[CONFIGURATION.theme_palette.0]">
-        <Variant mode="AMBIENT" target="backgroundColor" value="#ff000000" />
+    <Scene backgroundColor="#ff000000">
+        <!-- Dynamic theme background fill (ensures runtime re-renders when theme changes) -->
+        <PartDraw x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Rectangle x="0" y="0" width="450" height="450">
+                <Fill color="[CONFIGURATION.theme_palette.0]" />
+            </Rectangle>
+        </PartDraw>
 
         <!-- ============================================================ -->
         <!-- OUTER CIRCULAR BATTERY GAUGE (10-SEGMENT RING)               -->
