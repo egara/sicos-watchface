@@ -277,7 +277,7 @@
 
         <!-- Active time display in warm Gruvbox cream (#ffd4be98)        -->
         <Group name="clock_touch_target" x="25" y="160" width="400" height="130">
-            <Launch target="com.google.android.clockwork.flashlight/.FlashlightActivity" />
+            <Launch target="com.google.android.clockwork.flashlight/com.google.android.clockwork.flashlight.FlashlightActivity" />
             <Condition>
                 <Expressions>
                     <Expression name="is_24h"><![CDATA[[CONFIGURATION.time_format_24h] == "TRUE"]]></Expression>
