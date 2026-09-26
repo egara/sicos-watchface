@@ -13,6 +13,14 @@
             displayName="@string/config_24hour_label"
             screenReaderText="@string/config_24hour_desc"
             defaultValue="TRUE" />
+        <ListConfiguration
+            id="display_profile"
+            displayName="@string/config_display_profile_label"
+            screenReaderText="@string/config_display_profile_desc"
+            defaultValue="full">
+            <ListOption id="full" displayName="@string/profile_full_label" />
+            <ListOption id="time_only" displayName="@string/profile_time_only_label" />
+        </ListConfiguration>
     </UserConfigurations>
 
     <Scene backgroundColor="#ff282828">
@@ -24,23 +32,30 @@
         <!-- Circumference: ~1350.88px -> Slot: ~135.09px                -->
         <!-- Segment Dash: 123.09px, Gap: 12px                            -->
         <!-- ============================================================ -->
-        <Group name="circular_battery_gauge" x="0" y="0" width="450" height="450">
-            <Variant mode="AMBIENT" target="alpha" value="0" />
-            <!-- 1. Inactive / Ghost 10-segment track (#ff3c3836) -->
-            <PartDraw x="10" y="10" width="430" height="430">
-                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
-                    <Stroke color="#ff3c3836" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
-                </Arc>
-            </PartDraw>
+        <Condition>
+            <Expressions>
+                <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
+            </Expressions>
+            <Compare expression="is_full_profile">
+                <Group name="circular_battery_gauge" x="0" y="0" width="450" height="450">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <!-- 1. Inactive / Ghost 10-segment track (#ff3c3836) -->
+                    <PartDraw x="10" y="10" width="430" height="430">
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
+                        </Arc>
+                    </PartDraw>
 
-            <!-- 2. Active battery progress arc (fills proportionally up to 360 deg) -->
-            <PartDraw x="10" y="10" width="430" height="430">
-                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
-                    <Transform target="endAngle" value="clamp([BATTERY_PERCENT] * 3.6, 0.1, 360)" />
-                    <Stroke color="#ffa9b665" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
-                </Arc>
-            </PartDraw>
-        </Group>
+                    <!-- 2. Active battery progress arc (fills proportionally up to 360 deg) -->
+                    <PartDraw x="10" y="10" width="430" height="430">
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                            <Transform target="endAngle" value="clamp([BATTERY_PERCENT] * 3.6, 0.1, 360)" />
+                            <Stroke color="#ffa9b665" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
+                        </Arc>
+                    </PartDraw>
+                </Group>
+            </Compare>
+        </Condition>
 
         <!-- ============================================================ -->
         <!-- TOP COMPLICATIONS ROW (3 Centered Columns)                   -->
@@ -62,62 +77,79 @@
             <Complication type="SHORT_TEXT">
                 <Condition>
                     <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                         <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
                     </Expressions>
-                    <Compare expression="show_dynamic_icon">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
-                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
-                        </PartImage>
+                    <Compare expression="is_full_profile">
+                        <Condition>
+                            <Compare expression="show_dynamic_icon">
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                                </PartImage>
+                            </Compare>
+                            <Default>
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                                    <Image resource="ic_heart" />
+                                </PartImage>
+                            </Default>
+                        </Condition>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                    <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
                     </Compare>
-                    <Default>
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
-                            <Image resource="ic_heart" />
-                        </PartImage>
-                    </Default>
                 </Condition>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
-                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                        </Font>
-                    </Text>
-                </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
                 <Condition>
                     <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                         <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
                     </Expressions>
-                    <Compare expression="show_dynamic_icon">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
-                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
-                        </PartImage>
+                    <Compare expression="is_full_profile">
+                        <Condition>
+                            <Compare expression="show_dynamic_icon">
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                                </PartImage>
+                            </Compare>
+                            <Default>
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                                    <Image resource="ic_heart" />
+                                </PartImage>
+                            </Default>
+                        </Condition>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                    <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
                     </Compare>
-                    <Default>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY">
+                <Condition>
+                    <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
+                    </Expressions>
+                    <Compare expression="is_full_profile">
                         <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
                             <Image resource="ic_heart" />
                         </PartImage>
-                    </Default>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                    <Template>--</Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                    </Compare>
                 </Condition>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
-                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                        </Font>
-                    </Text>
-                </PartText>
-            </Complication>
-            <Complication type="EMPTY">
-                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
-                    <Image resource="ic_heart" />
-                </PartImage>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
-                            <Template>--</Template>
-                        </Font>
-                    </Text>
-                </PartText>
             </Complication>
         </ComplicationSlot>
 
@@ -132,62 +164,79 @@
             <Complication type="SHORT_TEXT">
                 <Condition>
                     <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                         <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
                     </Expressions>
-                    <Compare expression="show_dynamic_icon">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
-                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
-                        </PartImage>
+                    <Compare expression="is_full_profile">
+                        <Condition>
+                            <Compare expression="show_dynamic_icon">
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                                </PartImage>
+                            </Compare>
+                            <Default>
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                                    <Image resource="ic_steps" />
+                                </PartImage>
+                            </Default>
+                        </Condition>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                    <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
                     </Compare>
-                    <Default>
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
-                            <Image resource="ic_steps" />
-                        </PartImage>
-                    </Default>
                 </Condition>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
-                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                        </Font>
-                    </Text>
-                </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
                 <Condition>
                     <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                         <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
                     </Expressions>
-                    <Compare expression="show_dynamic_icon">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
-                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
-                        </PartImage>
+                    <Compare expression="is_full_profile">
+                        <Condition>
+                            <Compare expression="show_dynamic_icon">
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                                </PartImage>
+                            </Compare>
+                            <Default>
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                                    <Image resource="ic_steps" />
+                                </PartImage>
+                            </Default>
+                        </Condition>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                    <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
                     </Compare>
-                    <Default>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY">
+                <Condition>
+                    <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
+                    </Expressions>
+                    <Compare expression="is_full_profile">
                         <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
                             <Image resource="ic_steps" />
                         </PartImage>
-                    </Default>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                    <Template>--</Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                    </Compare>
                 </Condition>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
-                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                        </Font>
-                    </Text>
-                </PartText>
-            </Complication>
-            <Complication type="EMPTY">
-                <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
-                    <Image resource="ic_steps" />
-                </PartImage>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
-                            <Template>--</Template>
-                        </Font>
-                    </Text>
-                </PartText>
             </Complication>
         </ComplicationSlot>
 
@@ -204,62 +253,79 @@
             <Complication type="SHORT_TEXT">
                 <Condition>
                     <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                         <Expression name="has_weather_icon"><![CDATA[[COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
                     </Expressions>
-                    <Compare expression="has_weather_icon">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
-                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
-                        </PartImage>
+                    <Compare expression="is_full_profile">
+                        <Condition>
+                            <Compare expression="has_weather_icon">
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                                </PartImage>
+                            </Compare>
+                            <Default>
+                                <PartImage x="38" y="10" width="24" height="24">
+                                    <Image resource="ic_temp" />
+                                </PartImage>
+                            </Default>
+                        </Condition>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                    <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
                     </Compare>
-                    <Default>
-                        <PartImage x="38" y="10" width="24" height="24">
-                            <Image resource="ic_temp" />
-                        </PartImage>
-                    </Default>
                 </Condition>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
-                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                        </Font>
-                    </Text>
-                </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
                 <Condition>
                     <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                         <Expression name="has_weather_icon"><![CDATA[[COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
                     </Expressions>
-                    <Compare expression="has_weather_icon">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
-                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
-                        </PartImage>
+                    <Compare expression="is_full_profile">
+                        <Condition>
+                            <Compare expression="has_weather_icon">
+                                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
+                                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                                </PartImage>
+                            </Compare>
+                            <Default>
+                                <PartImage x="38" y="10" width="24" height="24">
+                                    <Image resource="ic_temp" />
+                                </PartImage>
+                            </Default>
+                        </Condition>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                    <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
                     </Compare>
-                    <Default>
+                </Condition>
+            </Complication>
+            <Complication type="EMPTY">
+                <Condition>
+                    <Expressions>
+                        <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
+                    </Expressions>
+                    <Compare expression="is_full_profile">
                         <PartImage x="38" y="10" width="24" height="24">
                             <Image resource="ic_temp" />
                         </PartImage>
-                    </Default>
+                        <PartText x="0" y="42" width="100" height="40">
+                            <Text align="CENTER">
+                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                    <Template>--</Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                    </Compare>
                 </Condition>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
-                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                        </Font>
-                    </Text>
-                </PartText>
-            </Complication>
-            <Complication type="EMPTY">
-                <PartImage x="38" y="10" width="24" height="24">
-                    <Image resource="ic_temp" />
-                </PartImage>
-                <PartText x="0" y="42" width="100" height="40">
-                    <Text align="CENTER">
-                        <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
-                            <Template>--</Template>
-                        </Font>
-                    </Text>
-                </PartText>
             </Complication>
         </ComplicationSlot>
 
@@ -302,39 +368,45 @@
         </Group>
 
         <!-- ============================================================ -->
-        <!-- SEPARATOR LINE                                               -->
-        <!-- ============================================================ -->
-        <PartDraw x="45" y="295" width="360" height="4">
-            <Variant mode="AMBIENT" target="alpha" value="0" />
-            <Line startX="0" startY="2" endX="360" endY="2">
-                <Stroke color="#ffd4be98" thickness="3" cap="ROUND" />
-            </Line>
-        </PartDraw>
-
-        <!-- ============================================================ -->
-        <!-- BOTTOM DATE AREA (14-segment LCD: DAY_OF_WEEK MONTH DAY)     -->
+        <!-- SEPARATOR LINE & BOTTOM DATE AREA                            -->
         <!-- Tap shortcut: Launches Calendar system shortcut              -->
         <!-- ============================================================ -->
-        <!-- Ghost underlay for date in Gruvbox dark gray (#ff3c3836)     -->
-        <PartText x="25" y="318" width="400" height="50">
-            <Variant mode="AMBIENT" target="alpha" value="0" />
-            <Text align="CENTER">
-                <Font family="dseg14_classic_bold" size="30" color="#ff3c3836">
-                    <Template>~~~ ~~~ ~~</Template>
-                </Font>
-            </Text>
-        </PartText>
+        <Condition>
+            <Expressions>
+                <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
+            </Expressions>
+            <Compare expression="is_full_profile">
+                <Group name="bottom_date_group" x="0" y="0" width="450" height="450">
+                    <PartDraw x="45" y="295" width="360" height="4">
+                        <Variant mode="AMBIENT" target="alpha" value="0" />
+                        <Line startX="0" startY="2" endX="360" endY="2">
+                            <Stroke color="#ffd4be98" thickness="3" cap="ROUND" />
+                        </Line>
+                    </PartDraw>
 
-        <!-- Active date text in warm Gruvbox cream (#ffd4be98)           -->
-        <PartText x="25" y="318" width="400" height="50">
-            <Variant mode="AMBIENT" target="alpha" value="0" />
-            <Launch target="CALENDAR" />
-            <Text align="CENTER">
-                <Font family="dseg14_classic_bold" size="30" color="#ffd4be98">
-                    <Template>%s %s %02d<Parameter expression="[DAY_OF_WEEK_S]" /><Parameter expression="[MONTH_S]" /><Parameter expression="[DAY]" /></Template>
-                </Font>
-            </Text>
-        </PartText>
+                    <!-- Ghost underlay for date in Gruvbox dark gray (#ff3c3836)     -->
+                    <PartText x="25" y="318" width="400" height="50">
+                        <Variant mode="AMBIENT" target="alpha" value="0" />
+                        <Text align="CENTER">
+                            <Font family="dseg14_classic_bold" size="30" color="#ff3c3836">
+                                <Template>~~~ ~~~ ~~</Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+
+                    <!-- Active date text in warm Gruvbox cream (#ffd4be98)           -->
+                    <PartText x="25" y="318" width="400" height="50">
+                        <Variant mode="AMBIENT" target="alpha" value="0" />
+                        <Launch target="CALENDAR" />
+                        <Text align="CENTER">
+                            <Font family="dseg14_classic_bold" size="30" color="#ffd4be98">
+                                <Template>%s %s %02d<Parameter expression="[DAY_OF_WEEK_S]" /><Parameter expression="[MONTH_S]" /><Parameter expression="[DAY]" /></Template>
+                            </Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Compare>
+        </Condition>
 
     </Scene>
 </WatchFace>

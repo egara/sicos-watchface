@@ -7,4 +7,8 @@
     <string name="config_gruvbox_icons_desc">Use authentic Gruvbox vector icons for health metrics to prevent provider color distortion</string>
     <string name="config_24hour_label">24-Hour Time Format</string>
     <string name="config_24hour_desc">Force 24-hour military digital clock format instead of 12-hour format</string>
+    <string name="config_display_profile_label">Display Profile</string>
+    <string name="config_display_profile_desc">Choose between full layout with metrics or a clean time-only layout</string>
+    <string name="profile_full_label">Full Display</string>
+    <string name="profile_time_only_label">Time Only (Clean)</string>
 </resources>

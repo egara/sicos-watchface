@@ -39,6 +39,7 @@ Built entirely using declarative XML with Google's official **Watch Face Format 
   - Customizable directly on the watch face customize screen or via the Pixel Watch smartphone companion app:
     - **Gruvbox Native Icons (`clean_gruvbox_icons`)**: When enabled (default), health metrics render crisp, bespoke Gruvbox icons (`ic_heart`, `ic_steps`, `ic_temp`) with 100% color fidelity, preventing provider tint distortion. When disabled, displays the provider's raw monochromatic icon.
     - **24-Hour Time Format (`time_format_24h`)**: Toggle between 24-hour military time (`hourFormat="24"`, default) and standard 12-hour time (`hourFormat="12"`).
+    - **Display Profile (`display_profile`)**: Choose between **Full Display** (`full`, default) showing all metrics, battery ring, and date, or a clean **Time Only** (`time_only`) minimalist layout showing exclusively the digital clock and ghost LCD digits.
 - **Interactive Tap Shortcuts (`<Launch>`)**:
   - **Digital Clock Tap**: Immediately launches the system **Flashlight** application (`com.google.android.clockwork.flashlight`).
   - **Date Matrix Tap**: Opens the system **Calendar / Agenda** app (`CALENDAR`).

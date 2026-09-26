@@ -41,6 +41,9 @@
 * **`time_format_24h` (Boolean, default: `TRUE`)**:
   - `TRUE`: 24-hour military digital clock format (`hh:mm` 00–23).
   - `FALSE`: 12-hour digital clock format (`hh:mm` 01–12).
+* **`display_profile` (ListConfiguration, default: `full`)**:
+  - `full` ("Full Display"): Complete watch face layout including outer 10-segment circular battery gauge, 3 top complication columns, digital clock, separator line, and bottom date with ghost underlay.
+  - `time_only` ("Time Only (Clean)"): Minimalist, clean interactive layout displaying exclusively the central digital clock and inactive LCD "ghost" `88:88` digits (hiding battery meter, complications, separator, and date).
 
 ## 6. Interactive Tap Actions (`<Launch>`)
 * **Time Area Tap (Clock)**: Launches system **Flashlight** (`com.google.android.clockwork.flashlight/.FlashlightActivity`).

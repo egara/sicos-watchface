@@ -42,5 +42,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Switched ambient scene background to pure black (`#ff000000`) for maximum OLED energy efficiency.
   - Automatically hides (`alpha=0`) outer circular battery gauge, all 3 top complications, separator line, and bottom date row.
   - Preserves only the central digital clock (`hh:mm`) and the retro inactive LCD "ghost" segments (`88:88`).
+- Added `display_profile` user configuration option:
+  - Supports switching between **Full Display** (`full`, default) and **Time Only / Clean** (`time_only`).
+  - In `time_only` mode, conditionally hides outer circular battery gauge, all 3 top complication slots, horizontal separator line, and bottom date row while maintaining the central digital clock and LCD ghost segments.
+  - Added localized strings in `res/values/strings.xml` and updated design documentation.
 
 
