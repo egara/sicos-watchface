@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Sicos Watchface</string>
+    <string name="complication_cardioload_label">Cardio Load</string>
+    <string name="complication_steps_label">Steps</string>
+    <string name="complication_temp_label">Temperature</string>
+    <string name="config_gruvbox_icons_label">Gruvbox Native Icons</string>
+    <string name="config_gruvbox_icons_desc">Use authentic Gruvbox vector icons for health metrics to prevent provider color distortion</string>
+    <string name="config_24hour_label">24-Hour Time Format</string>
+    <string name="config_24hour_desc">Force 24-hour military digital clock format instead of 12-hour format</string>
 </resources>
