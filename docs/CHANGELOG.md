@@ -49,5 +49,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Aligned outer 10-segment circular battery gauge with 12:00:
   - Adjusted `dashPhase="61.5"` on the stroke pattern so that the first segment starts cleanly aligned with the 12 o'clock vertical mark (0°).
   - Achieved vertical bilateral symmetry with gaps aligned at 12:00 (0°) and 6:00 (180°).
+- Fixed regression where complication icons disappeared under nested conditions:
+  - Flattened nested `<Condition>` blocks inside all three `<ComplicationSlot>` elements into single-level expressions with boolean logic (`&&` / `||`), fully restoring Gruvbox native icons and dynamic icons.
 
 
