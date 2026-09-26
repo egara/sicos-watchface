@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sicos Watchface</string>
+    <string name="app_name">SicOS</string>
     <string name="complication_cardioload_label">Cardio Load</string>
     <string name="complication_steps_label">Steps</string>
     <string name="complication_temp_label">Temperature</string>

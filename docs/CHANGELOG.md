@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - All visual elements (scene background, ghost LCD segments, active digits, separator line, battery gauge, and complication accents) dynamically adapt to the selected theme.
 - Inverted icon selection configuration (`native_icons`):
   - Changed behavior so that disabling the switch uses custom-designed watch face icons, and enabling it uses native Fitbit / provider icons.
+- Watch face preview thumbnail and launcher icon (`watch_preview.png`, `ic_launcher.png`) showcasing the authentic GruvBoxEsk layout with active complications and battery meter in watch selection menus.
+
+### Changed
+- Watch face display name renamed to **SicOS** (`app_name` string).
 
 ### Fixed
 - Fixed circular battery gauge progression inaccuracy:
