@@ -5,15 +5,35 @@
 * **Base Dimension**: 450 x 450 px
 * **Clip Shape**: `CIRCLE`
 
-## 2. Color Palette (Gruvbox Material Dark)
-* **Background (`#ff282828`)**: Gruvbox dark surface tone.
-* **Inactive Segments / Ghost LCD (`#ff32302f`)**: Low-contrast background digits (`88:88`).
-* **Active Digits & Line (`#ffd4be98`)**: Gruvbox Cream / Light Yellow.
-* **Heart Rate Accent (`#ffea6962`)**: Gruvbox Red.
-* **Cardio Load Accent (`#ffea6962`)**: Gruvbox Red.
-* **Step Count Accent (`#ff83a598`)**: Gruvbox Bright Blue.
-* **Temperature Accent (`#ffd8a657`)**: Gruvbox Yellow.
-* **Battery Accent (`#ffa9b665`)**: Gruvbox Green.
+## 2. Color Palettes (`theme_palette`)
+The watch face supports three selectable color themes via `<ColorConfiguration id="theme_palette">`:
+
+1. **Gruvbox Dark (`gruvbox`, default)**:
+   - Surface Background: `#ff282828`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ff3c3836`
+   - Active Digits, Text & Separator: `#ffd4be98`
+   - Cardio Load Accent: `#ffea6962`
+   - Steps Accent: `#ff83a598`
+   - Temperature Accent: `#ffd8a657`
+   - Battery Gauge Accent: `#ffa9b665`
+
+2. **Tokyo Night (`tokyo_night`)**:
+   - Surface Background: `#ff1a1b26`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ff24283b`
+   - Active Digits, Text & Separator: `#ffc0caf5`
+   - Cardio Load Accent: `#fff7768e`
+   - Steps Accent: `#ff7aa2f7`
+   - Temperature Accent: `#ffe0af68`
+   - Battery Gauge Accent: `#ff9ece6a`
+
+3. **Catppuccin Mocha (`catppuccin_mocha`)**:
+   - Surface Background: `#ff1e1e2e`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ff313244`
+   - Active Digits, Text & Separator: `#ffcdd6f4`
+   - Cardio Load Accent: `#fff38ba8`
+   - Steps Accent: `#ff89b4fa`
+   - Temperature Accent: `#fff9e2af`
+   - Battery Gauge Accent: `#ffa6e3a1`
 
 ## 3. Typography
 * **Digital Clock (7-Segment LCD)**: `DSEG7 Classic Bold` (`res/font/dseg7_classic_bold.ttf`).
@@ -23,22 +43,24 @@
 * **Outer Perimeter (R=215, Diameter=430px)**:
   - Circular 10-segment battery gauge with discrete 32.8° arc segments and 3.2° gaps.
   - Aligned with 12:00: bilateral symmetry with gaps centered at 12:00 (0°) and 6:00 (180°). Segment 1 spans 1.6° to 34.4°, Segment 10 spans 325.6° to 358.4°.
-  - Background track: Inactive segments in Gruvbox dark gray (`#ff3c3836`).
-  - Active fill: Illuminated segments in Gruvbox green (`#ffa9b665`). Completely filled for completed 10% blocks, and continuously progressing within the current active segment (e.g. at 86%, segments 1–8 are 100% full, segment 9 is 60% filled, and segment 10 is inactive).
+  - Background track: Inactive segments dynamically colored by `[CONFIGURATION.theme_palette.1]`.
+  - Active fill: Illuminated segments colored by `[CONFIGURATION.theme_palette.6]`. Completely filled for completed 10% blocks, and continuously progressing within the current active segment (e.g. at 86%, segments 1–8 are 100% full, segment 9 is 60% filled, and segment 10 is inactive).
 * **Top Row (y=55 to 145)**: 3 universal and customizable complication columns (`ComplicationSlot`, `SHORT_TEXT` / `RANGED_VALUE`):
-  - **Slot 1 (Left, x=78, w=100)**: Customizable complication (defaults to Fitbit Cardio Load) in Gruvbox Red (`#ffea6962`). Renders dynamic provider icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to Fitbit official cardio heart vector (`ic_heart`).
-  - **Slot 2 (Center, x=175, w=100)**: Customizable complication (defaults to Step Count) in Gruvbox Bright Blue (`#ff83a598`). Renders dynamic provider icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to official sneaker vector (`ic_steps`).
-  - **Slot 3 (Right, x=272, w=100)**: Customizable complication (defaults to Weather Temperature) in Gruvbox Yellow (`#ffd8a657`). Renders dynamic weather condition icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to thermometer vector (`ic_temp`).
+  - **Slot 1 (Left, x=78, w=100)**: Customizable complication (defaults to Fitbit Cardio Load) in theme accent color 3 (`[CONFIGURATION.theme_palette.3]`). Renders dynamic provider icon or custom vector (`ic_heart`).
+  - **Slot 2 (Center, x=175, w=100)**: Customizable complication (defaults to Step Count) in theme accent color 4 (`[CONFIGURATION.theme_palette.4]`). Renders dynamic provider icon or custom vector (`ic_steps`).
+  - **Slot 3 (Right, x=272, w=100)**: Customizable complication (defaults to Weather Temperature) in theme accent color 5 (`[CONFIGURATION.theme_palette.5]`). Renders dynamic weather condition icon with fallback to thermometer vector (`ic_temp`).
 * **Center (y=168)**:
-  - Underlay: Ghost `88:88` digits.
-  - Overlay: Real-time digital clock (`hh:mm`).
-* **Separator (y=295)**: Horizontal line with rounded caps (`#ffd4be98`).
-* **Bottom (y=318)**: Formatted date: `[DAY_OF_WEEK_S] [MONTH_S] [DAY]` (e.g. `THU SEP 24`).
+  - Underlay: Ghost `88:88` digits in `[CONFIGURATION.theme_palette.1]`.
+  - Overlay: Real-time digital clock (`hh:mm`) in `[CONFIGURATION.theme_palette.2]`.
+* **Separator (y=295)**: Horizontal line with rounded caps in `[CONFIGURATION.theme_palette.2]`.
+* **Bottom (y=318)**: Formatted date: `[DAY_OF_WEEK_S] [MONTH_S] [DAY]` (e.g. `THU SEP 24`) in `[CONFIGURATION.theme_palette.2]` with underlay in `[CONFIGURATION.theme_palette.1]`.
 
 ## 5. User Configurations (`<UserConfigurations>`)
-* **`clean_gruvbox_icons` (Boolean, default: `TRUE`)**:
-  - `TRUE`: Health metrics (Cardio Load & Steps) display authentic, clean Gruvbox vector icons (`ic_heart`, `ic_steps`) ensuring 100% exact Gruvbox Red (`#ea6962`) and Bright Blue (`#83a598`) colors without provider tint interference.
-  - `FALSE`: Full dynamic complication icons (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) delivered by any third-party provider.
+* **`theme_palette` (ColorConfiguration, default: `gruvbox`)**:
+  - Lets the user pick between **Gruvbox Dark**, **Tokyo Night**, and **Catppuccin Mocha**. Dynamically updates backgrounds, active text, ghost LCD segments, complications, and battery gauge.
+* **`native_icons` (Boolean, default: `FALSE`)**:
+  - `TRUE`: Uses the dynamic/monochromatic icons provided natively by Fitbit or third-party providers (`[COMPLICATION.MONOCHROMATIC_IMAGE]`), tinted to the slot color.
+  - `FALSE` (default): Uses the custom pixel-perfect vector icons designed specifically for this watch face (`ic_heart`, `ic_steps`, `ic_temp`), tinted to the active theme palette.
 * **`time_format_24h` (Boolean, default: `TRUE`)**:
   - `TRUE`: 24-hour military digital clock format (`hh:mm` 00–23).
   - `FALSE`: 12-hour digital clock format (`hh:mm` 01–12).

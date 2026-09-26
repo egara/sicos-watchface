@@ -3,11 +3,25 @@
     <Metadata key="PREVIEW_TIME" value="10:09:30" />
 
     <UserConfigurations>
+        <ColorConfiguration
+            id="theme_palette"
+            displayName="@string/config_theme_palette_label"
+            defaultValue="gruvbox">
+            <!-- Gruvbox Material Dark -->
+            <ColorOption id="gruvbox" displayName="@string/theme_gruvbox_label"
+                colors="#ff282828 #ff3c3836 #ffd4be98 #ffea6962 #ff83a598 #ffd8a657 #ffa9b665" />
+            <!-- Tokyo Night -->
+            <ColorOption id="tokyo_night" displayName="@string/theme_tokyo_night_label"
+                colors="#ff1a1b26 #ff24283b #ffc0caf5 #fff7768e #ff7aa2f7 #ffe0af68 #ff9ece6a" />
+            <!-- Catppuccin Mocha -->
+            <ColorOption id="catppuccin_mocha" displayName="@string/theme_catppuccin_mocha_label"
+                colors="#ff1e1e2e #ff313244 #ffcdd6f4 #fff38ba8 #ff89b4fa #fff9e2af #ffa6e3a1" />
+        </ColorConfiguration>
         <BooleanConfiguration
-            id="clean_gruvbox_icons"
-            displayName="@string/config_gruvbox_icons_label"
-            screenReaderText="@string/config_gruvbox_icons_desc"
-            defaultValue="TRUE" />
+            id="native_icons"
+            displayName="@string/config_native_icons_label"
+            screenReaderText="@string/config_native_icons_desc"
+            defaultValue="FALSE" />
         <BooleanConfiguration
             id="time_format_24h"
             displayName="@string/config_24hour_label"
@@ -23,7 +37,7 @@
         </ListConfiguration>
     </UserConfigurations>
 
-    <Scene backgroundColor="#ff282828">
+    <Scene backgroundColor="[CONFIGURATION.theme_palette.0]">
         <Variant mode="AMBIENT" target="backgroundColor" value="#ff000000" />
 
         <!-- ============================================================ -->
@@ -39,42 +53,42 @@
             <Compare expression="is_full_profile">
                 <Group name="circular_battery_gauge" x="0" y="0" width="450" height="450">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <!-- 1. Inactive / Ghost 10-segment track (#ff3c3836) -->
+                    <!-- 1. Inactive / Ghost 10-segment track -->
                     <!-- 10 discrete segments: 32.8 deg span, 3.2 deg gap, bilateral symmetry at 12:00 -->
                     <PartDraw x="10" y="10" width="430" height="430">
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="1.6" endAngle="34.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="37.6" endAngle="70.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="73.6" endAngle="106.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="109.6" endAngle="142.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="145.6" endAngle="178.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="181.6" endAngle="214.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="217.6" endAngle="250.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="253.6" endAngle="286.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="289.6" endAngle="322.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="325.6" endAngle="358.4" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.1]" thickness="8" cap="ROUND" />
                         </Arc>
                     </PartDraw>
 
-                    <!-- 2. Active battery progress segments in Gruvbox green (#ffa9b665) -->
+                    <!-- 2. Active battery progress segments -->
                     <!-- Each segment has 32.8 deg span. It activates once entering its 10% range and grows proportionally up to full -->
                     <!-- Segment 1: 0% - 10% (1.6 to 34.4 deg) -->
                     <Condition>
@@ -85,7 +99,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="1.6" endAngle="34.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="1.6 + clamp([BATTERY_PERCENT] / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -100,7 +114,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="37.6" endAngle="70.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="37.6 + clamp(([BATTERY_PERCENT] - 10.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -115,7 +129,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="73.6" endAngle="106.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="73.6 + clamp(([BATTERY_PERCENT] - 20.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -130,7 +144,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="109.6" endAngle="142.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="109.6 + clamp(([BATTERY_PERCENT] - 30.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -145,7 +159,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="145.6" endAngle="178.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="145.6 + clamp(([BATTERY_PERCENT] - 40.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -160,7 +174,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="181.6" endAngle="214.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="181.6 + clamp(([BATTERY_PERCENT] - 50.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -175,7 +189,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="217.6" endAngle="250.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="217.6 + clamp(([BATTERY_PERCENT] - 60.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -190,7 +204,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="253.6" endAngle="286.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="253.6 + clamp(([BATTERY_PERCENT] - 70.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -205,7 +219,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="289.6" endAngle="322.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="289.6 + clamp(([BATTERY_PERCENT] - 80.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -220,7 +234,7 @@
                             <PartDraw x="10" y="10" width="430" height="430">
                                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="325.6" endAngle="358.4" direction="CLOCKWISE">
                                     <Transform target="endAngle" value="325.6 + clamp(([BATTERY_PERCENT] - 90.0) / 10.0, 0.05, 1.0) * 32.8" />
-                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                    <Stroke color="[CONFIGURATION.theme_palette.6]" thickness="8" cap="ROUND" />
                                 </Arc>
                             </PartDraw>
                         </Compare>
@@ -249,28 +263,28 @@
             <Complication type="SHORT_TEXT">
                 <Condition>
                     <Expressions>
-                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
-                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.clean_gruvbox_icons] == "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
+                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.native_icons] == "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.native_icons] != "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
                     </Expressions>
                     <Compare expression="show_dynamic">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.3]">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.3]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
                         </PartText>
                     </Compare>
                     <Compare expression="show_native">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.3]">
                             <Image resource="ic_heart" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.3]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
@@ -281,28 +295,28 @@
             <Complication type="RANGED_VALUE">
                 <Condition>
                     <Expressions>
-                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
-                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.clean_gruvbox_icons] == "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
+                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.native_icons] == "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.native_icons] != "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
                     </Expressions>
                     <Compare expression="show_dynamic">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.3]">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.3]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
                         </PartText>
                     </Compare>
                     <Compare expression="show_native">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.3]">
                             <Image resource="ic_heart" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.3]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
@@ -316,12 +330,12 @@
                         <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                     </Expressions>
                     <Compare expression="is_full_profile">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.3]">
                             <Image resource="ic_heart" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.3]">
                                     <Template>--</Template>
                                 </Font>
                             </Text>
@@ -342,28 +356,28 @@
             <Complication type="SHORT_TEXT">
                 <Condition>
                     <Expressions>
-                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
-                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.clean_gruvbox_icons] == "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
+                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.native_icons] == "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.native_icons] != "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
                     </Expressions>
                     <Compare expression="show_dynamic">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.4]">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.4]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
                         </PartText>
                     </Compare>
                     <Compare expression="show_native">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.4]">
                             <Image resource="ic_steps" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.4]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
@@ -374,28 +388,28 @@
             <Complication type="RANGED_VALUE">
                 <Condition>
                     <Expressions>
-                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
-                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.clean_gruvbox_icons] == "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
+                        <Expression name="show_dynamic"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [CONFIGURATION.native_icons] == "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                        <Expression name="show_native"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && ([CONFIGURATION.native_icons] != "TRUE" || [COMPLICATION.MONOCHROMATIC_IMAGE] == null)]]></Expression>
                     </Expressions>
                     <Compare expression="show_dynamic">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.4]">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.4]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
                         </PartText>
                     </Compare>
                     <Compare expression="show_native">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.4]">
                             <Image resource="ic_steps" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.4]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
@@ -409,12 +423,12 @@
                         <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                     </Expressions>
                     <Compare expression="is_full_profile">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.4]">
                             <Image resource="ic_steps" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.4]">
                                     <Template>--</Template>
                                 </Font>
                             </Text>
@@ -441,24 +455,24 @@
                         <Expression name="show_fallback"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [COMPLICATION.MONOCHROMATIC_IMAGE] == null]]></Expression>
                     </Expressions>
                     <Compare expression="show_dynamic">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.5]">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.5]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
                         </PartText>
                     </Compare>
                     <Compare expression="show_fallback">
-                        <PartImage x="38" y="10" width="24" height="24">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.5]">
                             <Image resource="ic_temp" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.5]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
@@ -473,24 +487,24 @@
                         <Expression name="show_fallback"><![CDATA[[CONFIGURATION.display_profile] != "time_only" && [COMPLICATION.MONOCHROMATIC_IMAGE] == null]]></Expression>
                     </Expressions>
                     <Compare expression="show_dynamic">
-                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.5]">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.5]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
                         </PartText>
                     </Compare>
                     <Compare expression="show_fallback">
-                        <PartImage x="38" y="10" width="24" height="24">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.5]">
                             <Image resource="ic_temp" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.5]">
                                     <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                 </Font>
                             </Text>
@@ -504,12 +518,12 @@
                         <Expression name="is_full_profile"><![CDATA[[CONFIGURATION.display_profile] != "time_only"]]></Expression>
                     </Expressions>
                     <Compare expression="is_full_profile">
-                        <PartImage x="38" y="10" width="24" height="24">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="[CONFIGURATION.theme_palette.5]">
                             <Image resource="ic_temp" />
                         </PartImage>
                         <PartText x="0" y="42" width="100" height="40">
                             <Text align="CENTER">
-                                <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                                <Font family="dseg7_classic_bold" size="24" color="[CONFIGURATION.theme_palette.5]">
                                     <Template>--</Template>
                                 </Font>
                             </Text>
@@ -524,16 +538,16 @@
         <!-- CENTER DIGITAL CLOCK AREA                                    -->
         <!-- Tap shortcut: Launches Flashlight (com.google.android.clockwork.flashlight/.FlashlightActivity) -->
         <!-- ============================================================ -->
-        <!-- Ghost 88:88 underlay in Gruvbox dark gray (#ff3c3836)        -->
+        <!-- Ghost 88:88 underlay in theme ghost color -->
         <PartText x="25" y="160" width="400" height="130">
             <Text align="CENTER">
-                <Font family="dseg7_classic_bold" size="92" color="#ff3c3836">
+                <Font family="dseg7_classic_bold" size="92" color="[CONFIGURATION.theme_palette.1]">
                     <Template>88:88</Template>
                 </Font>
             </Text>
         </PartText>
 
-        <!-- Active time display in warm Gruvbox cream (#ffd4be98)        -->
+        <!-- Active time display in theme active color -->
         <Group name="clock_touch_target" x="25" y="160" width="400" height="130">
             <Launch target="com.google.android.clockwork.flashlight/com.google.android.clockwork.flashlight.FlashlightActivity" />
             <Condition>
@@ -543,14 +557,14 @@
                 <Compare expression="is_24h">
                     <DigitalClock x="0" y="0" width="400" height="130">
                         <TimeText format="hh:mm" hourFormat="24" align="CENTER" x="0" y="0" width="400" height="130">
-                            <Font family="dseg7_classic_bold" size="92" color="#ffd4be98" />
+                            <Font family="dseg7_classic_bold" size="92" color="[CONFIGURATION.theme_palette.2]" />
                         </TimeText>
                     </DigitalClock>
                 </Compare>
                 <Default>
                     <DigitalClock x="0" y="0" width="400" height="130">
                         <TimeText format="hh:mm" hourFormat="12" align="CENTER" x="0" y="0" width="400" height="130">
-                            <Font family="dseg7_classic_bold" size="92" color="#ffd4be98" />
+                            <Font family="dseg7_classic_bold" size="92" color="[CONFIGURATION.theme_palette.2]" />
                         </TimeText>
                     </DigitalClock>
                 </Default>
@@ -570,26 +584,26 @@
                     <PartDraw x="45" y="295" width="360" height="4">
                         <Variant mode="AMBIENT" target="alpha" value="0" />
                         <Line startX="0" startY="2" endX="360" endY="2">
-                            <Stroke color="#ffd4be98" thickness="3" cap="ROUND" />
+                            <Stroke color="[CONFIGURATION.theme_palette.2]" thickness="3" cap="ROUND" />
                         </Line>
                     </PartDraw>
 
-                    <!-- Ghost underlay for date in Gruvbox dark gray (#ff3c3836)     -->
+                    <!-- Ghost underlay for date in theme ghost color -->
                     <PartText x="25" y="318" width="400" height="50">
                         <Variant mode="AMBIENT" target="alpha" value="0" />
                         <Text align="CENTER">
-                            <Font family="dseg14_classic_bold" size="30" color="#ff3c3836">
+                            <Font family="dseg14_classic_bold" size="30" color="[CONFIGURATION.theme_palette.1]">
                                 <Template>~~~ ~~~ ~~</Template>
                             </Font>
                         </Text>
                     </PartText>
 
-                    <!-- Active date text in warm Gruvbox cream (#ffd4be98)           -->
+                    <!-- Active date text in theme active color -->
                     <PartText x="25" y="318" width="400" height="50">
                         <Variant mode="AMBIENT" target="alpha" value="0" />
                         <Launch target="CALENDAR" />
                         <Text align="CENTER">
-                            <Font family="dseg14_classic_bold" size="30" color="#ffd4be98">
+                            <Font family="dseg14_classic_bold" size="30" color="[CONFIGURATION.theme_palette.2]">
                                 <Template>%s %s %02d<Parameter expression="[DAY_OF_WEEK_S]" /><Parameter expression="[MONTH_S]" /><Parameter expression="[DAY]" /></Template>
                             </Font>
                         </Text>

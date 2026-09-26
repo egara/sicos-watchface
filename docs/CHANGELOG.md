@@ -5,6 +5,13 @@ All notable changes and milestones for the **sicos-watchface** project will be d
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- Multi-theme color palette configuration (`<ColorConfiguration id="theme_palette">`):
+  - Added support for **Gruvbox Dark** (default), **Tokyo Night**, and **Catppuccin Mocha**.
+  - All visual elements (scene background, ghost LCD segments, active digits, separator line, battery gauge, and complication accents) dynamically adapt to the selected theme.
+- Inverted icon selection configuration (`native_icons`):
+  - Changed behavior so that disabling the switch uses custom-designed watch face icons, and enabling it uses native Fitbit / provider icons.
+
 ### Fixed
 - Fixed circular battery gauge progression inaccuracy:
   - Replaced continuous arc with `dashIntervals`/`dashPhase` with 10 discrete `<Arc>` segments.
