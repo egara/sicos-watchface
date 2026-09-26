@@ -20,7 +20,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Replaced linear top battery metric with an outer circular 10-segment battery gauge (`<Arc>` with `dashIntervals="123.09 12"`), showing an inactive ghost ring in `#3c3836` and proportional fill in Gruvbox green `#ffa9b665`.
   - Reorganized top metrics into 2 spacious, centered columns for Heart Rate and Step Count.
   - Successfully verified live rendering on device with ADB screen capture at both 100% and simulated 25% battery levels.
-
-
-
+- Replaced static top metrics with 3 customizable `ComplicationSlot` elements:
+  - **Slot 1 (Left)**: Fitbit Cardio Load (`OffloadableCardioLoadComplicationDataSourceService`) in Gruvbox Red (`#ffea6962`) using `ic_heart`.
+  - **Slot 2 (Center)**: Step Count (`STEP_COUNT`) in Gruvbox Aqua (`#ff7daea3`) using `ic_steps`.
+  - **Slot 3 (Right)**: Weather Temperature (`CWComplicationService`) in Gruvbox Yellow (`#ffd8a657`) with dynamic weather condition icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) tinted to match the Gruvbox palette, and fallback to `ic_temp`.
+- Made all 3 complication slots fully dynamic and universal:
+  - Configured conditional rendering (`[COMPLICATION.MONOCHROMATIC_IMAGE] != null`) across Slot 1, Slot 2, and Slot 3.
+  - When the user selects any third-party or system provider, its native icon is automatically rendered and tinted to that column's Gruvbox accent color (Red, Bright Blue, Yellow).
+  - Clean internal vector drawables (`ic_heart`, `ic_steps`, `ic_temp`) serve as reliable fallbacks whenever a provider does not supply an icon.
+  - Fully verified and deployed to Google Pixel Watch 3 via ADB.
+- Added native `<UserConfigurations>` settings for personalization:
+  - Added `clean_gruvbox_icons` boolean configuration ("Gruvbox Native Icons"): allows users to choose between pixel-perfect Gruvbox native icons (with exact RGB color fidelity) and dynamic third-party provider icons.
+  - Added `time_format_24h` boolean configuration ("24-Hour Time Format"): toggles between 24-hour military time (`hourFormat="24"`) and 12-hour standard time (`hourFormat="12"`).
+  - Converted internal icon resources to 48x48 raster PNGs in `res/drawable-nodpi/` to guarantee native rendering in the pure Watch Face Format runtime (`DeclarativeWatchFaceRuntimePrebuilt`).
+  - Added user-facing English strings and descriptions in `res/values/strings.xml`.
+  - Updated design documentation in `docs/DESIGN_SYSTEM.md` and verified live rendering on Google Pixel Watch 3.
+- Added interactive tap shortcuts (`<Launch>`):
+  - Digital clock area triggers system **Flashlight** (`com.google.android.clockwork.flashlight/.FlashlightActivity`).
+  - Bottom date area triggers system **Calendar** shortcut (`CALENDAR`).
 

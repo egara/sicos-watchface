@@ -2,6 +2,19 @@
     <Metadata key="CLOCK_TYPE" value="DIGITAL" />
     <Metadata key="PREVIEW_TIME" value="10:09:30" />
 
+    <UserConfigurations>
+        <BooleanConfiguration
+            id="clean_gruvbox_icons"
+            displayName="@string/config_gruvbox_icons_label"
+            screenReaderText="@string/config_gruvbox_icons_desc"
+            defaultValue="TRUE" />
+        <BooleanConfiguration
+            id="time_format_24h"
+            displayName="@string/config_24hour_label"
+            screenReaderText="@string/config_24hour_desc"
+            defaultValue="TRUE" />
+    </UserConfigurations>
+
     <Scene backgroundColor="#ff282828">
 
         <!-- ============================================================ -->
@@ -28,39 +41,230 @@
         </Group>
 
         <!-- ============================================================ -->
-        <!-- TOP METRICS ROW (Heart Rate & Steps - centered 2 columns)    -->
-        <!-- Fades out in Ambient / AOD mode                              -->
+        <!-- TOP COMPLICATIONS ROW (3 Centered Columns)                   -->
+        <!-- Slot 1: Cardio Load (Left, Gruvbox Red #ffea6962)           -->
+        <!-- Slot 2: Steps (Center, Gruvbox Aqua #ff83a598)               -->
+        <!-- Slot 3: Temperature (Right, Gruvbox Yellow #ffd8a657)        -->
         <!-- ============================================================ -->
-        <Group name="top_metrics" x="0" y="55" width="450" height="90">
+
+        <!-- 1. CARDIO LOAD / CUSTOMIZABLE (Left: x=78, width=100) -->
+        <ComplicationSlot slotId="1" supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
+            x="78" y="55" width="100" height="90" displayName="@string/complication_cardioload_label" isCustomizable="TRUE">
+            <BoundingBox x="0" y="0" width="100" height="90" />
+            <DefaultProviderPolicy
+                primaryProvider="com.fitbit.FitbitMobile/com.google.android.wearable.fitbit.mainapp.complications.offloadable.cardioload.OffloadableCardioLoadComplicationDataSourceService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="EMPTY"
+                defaultSystemProviderType="EMPTY" />
             <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Complication type="SHORT_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                    </Expressions>
+                    <Compare expression="show_dynamic_icon">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <Default>
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                            <Image resource="ic_heart" />
+                        </PartImage>
+                    </Default>
+                </Condition>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <Condition>
+                    <Expressions>
+                        <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                    </Expressions>
+                    <Compare expression="show_dynamic_icon">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <Default>
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                            <Image resource="ic_heart" />
+                        </PartImage>
+                    </Default>
+                </Condition>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="EMPTY">
+                <PartImage x="38" y="10" width="24" height="24" tintColor="#ffea6962">
+                    <Image resource="ic_heart" />
+                </PartImage>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ffea6962">
+                            <Template>--</Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
 
-            <!-- 1. HEART RATE (Left column: x=70, width=130) -->
-            <PartImage x="123" y="10" width="24" height="24">
-                <Image resource="ic_heart" />
-            </PartImage>
-            <PartText x="70" y="42" width="130" height="40">
-                <Text align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#ffea6962">
-                        <Template>%d<Parameter expression="[HEART_RATE]" /></Template>
-                    </Font>
-                </Text>
-            </PartText>
+        <!-- 2. STEP COUNT / CUSTOMIZABLE (Center: x=175, width=100) -->
+        <ComplicationSlot slotId="2" supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
+            x="175" y="55" width="100" height="90" displayName="@string/complication_steps_label" isCustomizable="TRUE">
+            <BoundingBox x="0" y="0" width="100" height="90" />
+            <DefaultProviderPolicy
+                defaultSystemProvider="STEP_COUNT"
+                defaultSystemProviderType="SHORT_TEXT" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Complication type="SHORT_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                    </Expressions>
+                    <Compare expression="show_dynamic_icon">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <Default>
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                            <Image resource="ic_steps" />
+                        </PartImage>
+                    </Default>
+                </Condition>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <Condition>
+                    <Expressions>
+                        <Expression name="show_dynamic_icon"><![CDATA[[CONFIGURATION.clean_gruvbox_icons] != "TRUE" && [COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                    </Expressions>
+                    <Compare expression="show_dynamic_icon">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <Default>
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                            <Image resource="ic_steps" />
+                        </PartImage>
+                    </Default>
+                </Condition>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="EMPTY">
+                <PartImage x="38" y="10" width="24" height="24" tintColor="#ff83a598">
+                    <Image resource="ic_steps" />
+                </PartImage>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ff83a598">
+                            <Template>--</Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
 
-            <!-- 2. STEP COUNT (Right column: x=250, width=130) -->
-            <PartImage x="303" y="10" width="24" height="24">
-                <Image resource="ic_steps" />
-            </PartImage>
-            <PartText x="250" y="42" width="130" height="40">
-                <Text align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#ff7daea3">
-                        <Template>%d<Parameter expression="[STEP_COUNT]" /></Template>
-                    </Font>
-                </Text>
-            </PartText>
-        </Group>
+        <!-- 3. TEMPERATURE (Right: x=272, width=100) -->
+        <ComplicationSlot slotId="3" supportedTypes="SHORT_TEXT RANGED_VALUE EMPTY"
+            x="272" y="55" width="100" height="90" displayName="@string/complication_temp_label" isCustomizable="TRUE">
+            <BoundingBox x="0" y="0" width="100" height="90" />
+            <DefaultProviderPolicy
+                primaryProvider="com.google.android.apps.weather/com.google.android.wearable.weather.pixel.ui.complications.currentweather.CWComplicationService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="EMPTY"
+                defaultSystemProviderType="EMPTY" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Complication type="SHORT_TEXT">
+                <Condition>
+                    <Expressions>
+                        <Expression name="has_weather_icon"><![CDATA[[COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                    </Expressions>
+                    <Compare expression="has_weather_icon">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <Default>
+                        <PartImage x="38" y="10" width="24" height="24">
+                            <Image resource="ic_temp" />
+                        </PartImage>
+                    </Default>
+                </Condition>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <Condition>
+                    <Expressions>
+                        <Expression name="has_weather_icon"><![CDATA[[COMPLICATION.MONOCHROMATIC_IMAGE] != null]]></Expression>
+                    </Expressions>
+                    <Compare expression="has_weather_icon">
+                        <PartImage x="38" y="10" width="24" height="24" tintColor="#ffd8a657">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <Default>
+                        <PartImage x="38" y="10" width="24" height="24">
+                            <Image resource="ic_temp" />
+                        </PartImage>
+                    </Default>
+                </Condition>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="EMPTY">
+                <PartImage x="38" y="10" width="24" height="24">
+                    <Image resource="ic_temp" />
+                </PartImage>
+                <PartText x="0" y="42" width="100" height="40">
+                    <Text align="CENTER">
+                        <Font family="dseg7_classic_bold" size="24" color="#ffd8a657">
+                            <Template>--</Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
 
+        <!-- ============================================================ -->
         <!-- ============================================================ -->
         <!-- CENTER DIGITAL CLOCK AREA                                    -->
+        <!-- Tap shortcut: Launches Flashlight (com.google.android.clockwork.flashlight/.FlashlightActivity) -->
         <!-- ============================================================ -->
         <!-- Ghost 88:88 underlay in Gruvbox dark gray (#ff3c3836)        -->
         <PartText x="25" y="160" width="400" height="130">
@@ -72,11 +276,28 @@
         </PartText>
 
         <!-- Active time display in warm Gruvbox cream (#ffd4be98)        -->
-        <DigitalClock x="25" y="160" width="400" height="130">
-            <TimeText format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="0" width="400" height="130">
-                <Font family="dseg7_classic_bold" size="92" color="#ffd4be98" />
-            </TimeText>
-        </DigitalClock>
+        <Group name="clock_touch_target" x="25" y="160" width="400" height="130">
+            <Launch target="com.google.android.clockwork.flashlight/.FlashlightActivity" />
+            <Condition>
+                <Expressions>
+                    <Expression name="is_24h"><![CDATA[[CONFIGURATION.time_format_24h] == "TRUE"]]></Expression>
+                </Expressions>
+                <Compare expression="is_24h">
+                    <DigitalClock x="0" y="0" width="400" height="130">
+                        <TimeText format="hh:mm" hourFormat="24" align="CENTER" x="0" y="0" width="400" height="130">
+                            <Font family="dseg7_classic_bold" size="92" color="#ffd4be98" />
+                        </TimeText>
+                    </DigitalClock>
+                </Compare>
+                <Default>
+                    <DigitalClock x="0" y="0" width="400" height="130">
+                        <TimeText format="hh:mm" hourFormat="12" align="CENTER" x="0" y="0" width="400" height="130">
+                            <Font family="dseg7_classic_bold" size="92" color="#ffd4be98" />
+                        </TimeText>
+                    </DigitalClock>
+                </Default>
+            </Condition>
+        </Group>
 
         <!-- ============================================================ -->
         <!-- SEPARATOR LINE                                               -->
@@ -89,6 +310,7 @@
 
         <!-- ============================================================ -->
         <!-- BOTTOM DATE AREA (14-segment LCD: DAY_OF_WEEK MONTH DAY)     -->
+        <!-- Tap shortcut: Launches Calendar system shortcut              -->
         <!-- ============================================================ -->
         <!-- Ghost underlay for date in Gruvbox dark gray (#ff3c3836)     -->
         <PartText x="25" y="318" width="400" height="50">
@@ -101,6 +323,7 @@
 
         <!-- Active date text in warm Gruvbox cream (#ffd4be98)           -->
         <PartText x="25" y="318" width="400" height="50">
+            <Launch target="CALENDAR" />
             <Text align="CENTER">
                 <Font family="dseg14_classic_bold" size="30" color="#ffd4be98">
                     <Template>%s %s %02d<Parameter expression="[DAY_OF_WEEK_S]" /><Parameter expression="[MONTH_S]" /><Parameter expression="[DAY]" /></Template>

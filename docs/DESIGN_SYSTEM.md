@@ -10,7 +10,9 @@
 * **Inactive Segments / Ghost LCD (`#ff32302f`)**: Low-contrast background digits (`88:88`).
 * **Active Digits & Line (`#ffd4be98`)**: Gruvbox Cream / Light Yellow.
 * **Heart Rate Accent (`#ffea6962`)**: Gruvbox Red.
-* **Step Count Accent (`#ff7daea3`)**: Gruvbox Aqua/Blue.
+* **Cardio Load Accent (`#ffea6962`)**: Gruvbox Red.
+* **Step Count Accent (`#ff83a598`)**: Gruvbox Bright Blue.
+* **Temperature Accent (`#ffd8a657`)**: Gruvbox Yellow.
 * **Battery Accent (`#ffa9b665`)**: Gruvbox Green.
 
 ## 3. Typography
@@ -22,16 +24,29 @@
   - Circular 10-segment battery gauge with 12px gaps (`dashIntervals="123.09 12"`).
   - Background track: Inactive segments in Gruvbox dark gray (`#ff3c3836`).
   - Active fill: Dynamic arc filled proportionally up to 360° in Gruvbox green (`#ffa9b665`). (e.g. 25% fills exactly 2.5 segments).
-* **Top Row (y=55 to 145)**: 2 centered columns with custom pixel-art icons and metrics:
-  - Heart Rate (`[HEART_RATE]`) in Gruvbox Red (`#ffea6962`).
-  - Step Count (`[STEP_COUNT]`) in Gruvbox Aqua (`#ff7daea3`).
+* **Top Row (y=55 to 145)**: 3 universal and customizable complication columns (`ComplicationSlot`, `SHORT_TEXT` / `RANGED_VALUE`):
+  - **Slot 1 (Left, x=78, w=100)**: Customizable complication (defaults to Fitbit Cardio Load) in Gruvbox Red (`#ffea6962`). Renders dynamic provider icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to Fitbit official cardio heart vector (`ic_heart`).
+  - **Slot 2 (Center, x=175, w=100)**: Customizable complication (defaults to Step Count) in Gruvbox Bright Blue (`#ff83a598`). Renders dynamic provider icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to official sneaker vector (`ic_steps`).
+  - **Slot 3 (Right, x=272, w=100)**: Customizable complication (defaults to Weather Temperature) in Gruvbox Yellow (`#ffd8a657`). Renders dynamic weather condition icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to thermometer vector (`ic_temp`).
 * **Center (y=168)**:
   - Underlay: Ghost `88:88` digits.
   - Overlay: Real-time digital clock (`hh:mm`).
 * **Separator (y=295)**: Horizontal line with rounded caps (`#ffd4be98`).
 * **Bottom (y=318)**: Formatted date: `[DAY_OF_WEEK_S] [MONTH_S] [DAY]` (e.g. `THU SEP 24`).
 
-## 5. Ambient Mode (Always-On Display - AOD)
+## 5. User Configurations (`<UserConfigurations>`)
+* **`clean_gruvbox_icons` (Boolean, default: `TRUE`)**:
+  - `TRUE`: Health metrics (Cardio Load & Steps) display authentic, clean Gruvbox vector icons (`ic_heart`, `ic_steps`) ensuring 100% exact Gruvbox Red (`#ea6962`) and Bright Blue (`#83a598`) colors without provider tint interference.
+  - `FALSE`: Full dynamic complication icons (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) delivered by any third-party provider.
+* **`time_format_24h` (Boolean, default: `TRUE`)**:
+  - `TRUE`: 24-hour military digital clock format (`hh:mm` 00–23).
+  - `FALSE`: 12-hour digital clock format (`hh:mm` 01–12).
+
+## 6. Interactive Tap Actions (`<Launch>`)
+* **Time Area Tap (Clock)**: Launches system **Flashlight** (`com.google.android.clockwork.flashlight/.FlashlightActivity`).
+* **Date Area Tap (Calendar)**: Launches system **Calendar** shortcut (`CALENDAR`).
+
+## 7. Ambient Mode (Always-On Display - AOD)
 * Top metrics row fades out (`alpha=0`) to save battery and prevent burn-in.
 * Digital clock and date remain visible in high-contrast Gruvbox cream.
 
