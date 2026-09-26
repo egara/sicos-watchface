@@ -19,15 +19,29 @@ Built entirely using declarative XML with Google's official **Watch Face Format 
   - Date (`DAY_OF_WEEK MONTH DAY`) rendered with 14-segment alphanumeric font (`DSEG14 Classic`) over full inactive 14-bar matrix cells.
 - **Gruvbox Material Dark Palette**:
   - Background: `#282828`
-  - Inactive LCD ghost elements: `#3c3836`
+  - Inactive LCD ghost elements & gauge track: `#3c3836`
   - Active time & date: `#d4be98` (warm cream)
-  - Heart Rate metric: `#ea6962` (Gruvbox red)
-  - Step counter metric: `#7daea3` (Gruvbox aqua)
-  - Battery metric: `#a9b665` (Gruvbox green)
-- **Real-Time Sensor Indicators**:
-  - Heart rate monitor (`[HEART_RATE]`) with pixel-art heart icon.
-  - Pedometer / Daily step count (`[STEP_COUNT]`) with footprint icon.
-  - Battery charge level (`[BATTERY_PERCENT]%`) with battery level icon.
+  - Cardio Load / Heart Rate accent: `#ea6962` (Gruvbox red)
+  - Steps counter accent: `#83a598` (Gruvbox bright blue)
+  - Weather / Temperature accent: `#d8a657` (Gruvbox yellow)
+  - Battery gauge fill: `#a9b665` (Gruvbox green)
+- **10-Segment Circular Outer Battery Gauge**:
+  - Outer perimeter gauge (`R=215px`, diameter `430px`) styled with 10 discrete segments (`dashIntervals="123.09 12"`).
+  - Subtle inactive track in `#3c3836` providing authentic hardware-meter feel.
+  - Dynamically fills clockwise up to 360° based on actual battery percentage (`[BATTERY_PERCENT]`).
+- **Dynamic & Customizable Complications (Top Row)**:
+  - Three independent, centered complication columns (`ComplicationSlot` supporting `SHORT_TEXT`, `RANGED_VALUE`, and `EMPTY`):
+    - **Slot 1 (Left)**: Defaults to Fitbit Cardio Load (`OffloadableCardioLoadComplicationDataSourceService`) in Gruvbox Red (`#ea6962`).
+    - **Slot 2 (Center)**: Defaults to Steps Count (`STEP_COUNT`) in Gruvbox Bright Blue (`#83a598`).
+    - **Slot 3 (Right)**: Defaults to Current Weather Temperature (`CWComplicationService`) in Gruvbox Yellow (`#d8a657`).
+  - **Universal Fallback & Icon Support**: If any slot is replaced by the user with a custom complication provider, it dynamically renders the provider's monochromatic icon tinted to that slot's signature Gruvbox color.
+- **User Configurations (`<UserConfigurations>`)**:
+  - Customizable directly on the watch face customize screen or via the Pixel Watch smartphone companion app:
+    - **Gruvbox Native Icons (`clean_gruvbox_icons`)**: When enabled (default), health metrics render crisp, bespoke Gruvbox icons (`ic_heart`, `ic_steps`, `ic_temp`) with 100% color fidelity, preventing provider tint distortion. When disabled, displays the provider's raw monochromatic icon.
+    - **24-Hour Time Format (`time_format_24h`)**: Toggle between 24-hour military time (`hourFormat="24"`, default) and standard 12-hour time (`hourFormat="12"`).
+- **Interactive Tap Shortcuts (`<Launch>`)**:
+  - **Digital Clock Tap**: Immediately launches the system **Flashlight** application (`com.google.android.clockwork.flashlight`).
+  - **Date Matrix Tap**: Opens the system **Calendar / Agenda** app (`CALENDAR`).
 - **Power Efficiency & Always-On Display (AOD)**:
   - Ambient mode automatically dims sensor row and secondary elements to maximize battery longevity and prevent OLED burn-in.
 
