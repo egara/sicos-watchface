@@ -21,10 +21,10 @@
 * **Date (14-Segment LCD)**: `DSEG14 Classic Bold` (`res/font/dseg14_classic_bold.ttf`).
 
 * **Outer Perimeter (R=215, Diameter=430px)**:
-  - Circular 10-segment battery gauge with 12px gaps (`dashIntervals="123.09 12"` with `dashPhase="61.5"`).
-  - Aligned with 12:00: the first segment begins exactly at the top vertical axis (12 o'clock / 0°), providing perfect vertical symmetry across the 12:00 and 6:00 axes.
+  - Circular 10-segment battery gauge with discrete 32.8° arc segments and 3.2° gaps.
+  - Aligned with 12:00: bilateral symmetry with gaps centered at 12:00 (0°) and 6:00 (180°). Segment 1 spans 1.6° to 34.4°, Segment 10 spans 325.6° to 358.4°.
   - Background track: Inactive segments in Gruvbox dark gray (`#ff3c3836`).
-  - Active fill: Dynamic arc filled proportionally up to 360° in Gruvbox green (`#ffa9b665`). (e.g. 25% fills exactly 2.5 segments).
+  - Active fill: Discretely illuminated segments in Gruvbox green (`#ffa9b665`), lighting up incrementally for each 10% step (at 90%, 9 segments active and exactly 1 inactive).
 * **Top Row (y=55 to 145)**: 3 universal and customizable complication columns (`ComplicationSlot`, `SHORT_TEXT` / `RANGED_VALUE`):
   - **Slot 1 (Left, x=78, w=100)**: Customizable complication (defaults to Fitbit Cardio Load) in Gruvbox Red (`#ffea6962`). Renders dynamic provider icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to Fitbit official cardio heart vector (`ic_heart`).
   - **Slot 2 (Center, x=175, w=100)**: Customizable complication (defaults to Step Count) in Gruvbox Bright Blue (`#ff83a598`). Renders dynamic provider icon (`[COMPLICATION.MONOCHROMATIC_IMAGE]`) with fallback to official sneaker vector (`ic_steps`).

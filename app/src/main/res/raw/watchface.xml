@@ -40,19 +40,180 @@
                 <Group name="circular_battery_gauge" x="0" y="0" width="450" height="450">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <!-- 1. Inactive / Ghost 10-segment track (#ff3c3836) -->
+                    <!-- 10 discrete segments: 32.8 deg span, 3.2 deg gap, bilateral symmetry at 12:00 -->
                     <PartDraw x="10" y="10" width="430" height="430">
-                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" dashIntervals="123.09 12" dashPhase="61.5" cap="ROUND" />
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="1.6" endAngle="34.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="37.6" endAngle="70.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="73.6" endAngle="106.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="109.6" endAngle="142.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="145.6" endAngle="178.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="181.6" endAngle="214.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="217.6" endAngle="250.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="253.6" endAngle="286.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="289.6" endAngle="322.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
+                        </Arc>
+                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="325.6" endAngle="358.4" direction="CLOCKWISE">
+                            <Stroke color="#ff3c3836" thickness="8" cap="ROUND" />
                         </Arc>
                     </PartDraw>
 
-                    <!-- 2. Active battery progress arc (fills proportionally up to 360 deg) -->
-                    <PartDraw x="10" y="10" width="430" height="430">
-                        <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
-                            <Transform target="endAngle" value="clamp([BATTERY_PERCENT] * 3.6, 0.1, 360)" />
-                            <Stroke color="#ffa9b665" thickness="8" dashIntervals="123.09 12" dashPhase="61.5" cap="ROUND" />
-                        </Arc>
-                    </PartDraw>
+                    <!-- 2. Active battery progress segments in Gruvbox green (#ffa9b665) -->
+                    <!-- Segment 1: >= 10% (1.6 to 34.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg1"><![CDATA[[BATTERY_PERCENT] >= 10]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg1">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="1.6" endAngle="34.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 2: >= 20% (37.6 to 70.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg2"><![CDATA[[BATTERY_PERCENT] >= 20]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg2">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="37.6" endAngle="70.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 3: >= 30% (73.6 to 106.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg3"><![CDATA[[BATTERY_PERCENT] >= 30]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg3">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="73.6" endAngle="106.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 4: >= 40% (109.6 to 142.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg4"><![CDATA[[BATTERY_PERCENT] >= 40]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg4">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="109.6" endAngle="142.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 5: >= 50% (145.6 to 178.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg5"><![CDATA[[BATTERY_PERCENT] >= 50]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg5">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="145.6" endAngle="178.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 6: >= 60% (181.6 to 214.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg6"><![CDATA[[BATTERY_PERCENT] >= 60]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg6">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="181.6" endAngle="214.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 7: >= 70% (217.6 to 250.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg7"><![CDATA[[BATTERY_PERCENT] >= 70]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg7">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="217.6" endAngle="250.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 8: >= 80% (253.6 to 286.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg8"><![CDATA[[BATTERY_PERCENT] >= 80]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg8">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="253.6" endAngle="286.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 9: >= 90% (289.6 to 322.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg9"><![CDATA[[BATTERY_PERCENT] >= 90]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg9">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="289.6" endAngle="322.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
+
+                    <!-- Segment 10: >= 99% (325.6 to 358.4 deg) -->
+                    <Condition>
+                        <Expressions>
+                            <Expression name="seg10"><![CDATA[[BATTERY_PERCENT] >= 99]]></Expression>
+                        </Expressions>
+                        <Compare expression="seg10">
+                            <PartDraw x="10" y="10" width="430" height="430">
+                                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="325.6" endAngle="358.4" direction="CLOCKWISE">
+                                    <Stroke color="#ffa9b665" thickness="8" cap="ROUND" />
+                                </Arc>
+                            </PartDraw>
+                        </Compare>
+                    </Condition>
                 </Group>
             </Compare>
         </Condition>

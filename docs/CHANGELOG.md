@@ -5,6 +5,13 @@ All notable changes and milestones for the **sicos-watchface** project will be d
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Fixed
+- Fixed circular battery gauge progression inaccuracy:
+  - Replaced continuous arc with `dashIntervals`/`dashPhase` with 10 discrete `<Arc>` segments.
+  - Eliminated phase distortion caused by clipping dynamic `endAngle` over dashed strokes.
+  - Symmetrically aligned segments with gaps centered at 12:00 (0°) and 6:00 (180°), lighting up exactly 1 segment per 10% battery step (e.g. at 90%, 9 segments active, 1 inactive segment remaining).
+  - Verified live on Google Pixel Watch 3 with ADB screen captures.
+
 ### Added
 - Project development skill defined at `.agents/skills/watchface-dev/SKILL.md`.
 - Documentation structure established under `docs/` (`ARCHITECTURE.md`, `DESIGN_SYSTEM.md`, `ENVIRONMENT.md`, `CHANGELOG.md`).
