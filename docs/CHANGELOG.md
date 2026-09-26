@@ -7,7 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ### Added
 - Multi-theme color palette configuration (`<ColorConfiguration id="theme_palette">`):
-  - Added support for **Gruvbox Dark** (default), **Tokyo Night**, and **Catppuccin Mocha**.
+  - Added support for 6 curated palettes (3 dark and 3 light):
+    - Dark: **Gruvbox Dark** (default), **Tokyo Night**, and **Catppuccin Mocha**.
+    - Light: **Tokyo Night Light**, **Gruvbox Light Soft**, and **Atelier Savanna Light**.
   - All visual elements (scene background, ghost LCD segments, active digits, separator line, battery gauge, and complication accents) dynamically adapt to the selected theme.
 - Inverted icon selection configuration (`native_icons`):
   - Changed behavior so that disabling the switch uses custom-designed watch face icons, and enabling it uses native Fitbit / provider icons.

@@ -15,4 +15,7 @@
     <string name="theme_gruvbox_label">Gruvbox Dark</string>
     <string name="theme_tokyo_night_label">Tokyo Night</string>
     <string name="theme_catppuccin_mocha_label">Catppuccin Mocha</string>
+    <string name="theme_tokyo_night_light_label">Tokyo Night Light</string>
+    <string name="theme_gruvbox_light_soft_label">Gruvbox Light Soft</string>
+    <string name="theme_atelier_savanna_light_label">Atelier Savanna Light</string>
 </resources>

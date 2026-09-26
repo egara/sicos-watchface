@@ -6,8 +6,9 @@
 * **Clip Shape**: `CIRCLE`
 
 ## 2. Color Palettes (`theme_palette`)
-The watch face supports three selectable color themes via `<ColorConfiguration id="theme_palette">`:
+The watch face supports six selectable color themes via `<ColorConfiguration id="theme_palette">` (3 dark themes and 3 light themes):
 
+### Dark Themes
 1. **Gruvbox Dark (`gruvbox`, default)**:
    - Surface Background: `#ff282828`
    - Inactive Segments / Ghost LCD / Battery Track: `#ff3c3836`
@@ -35,6 +36,34 @@ The watch face supports three selectable color themes via `<ColorConfiguration i
    - Temperature Accent: `#fff9e2af`
    - Battery Gauge Accent: `#ffa6e3a1`
 
+### Light Themes
+4. **Tokyo Night Light (`tokyo_night_light`)**:
+   - Surface Background: `#ffe1e2e7`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ffc8c9ce`
+   - Active Digits, Text & Separator: `#ff3760bf`
+   - Cardio Load Accent: `#fff52a65`
+   - Steps Accent: `#ff2e7de9`
+   - Temperature Accent: `#ff8c6c3e`
+   - Battery Gauge Accent: `#ff587539`
+
+5. **Gruvbox Light Soft (`gruvbox_light_soft`)**:
+   - Surface Background: `#fff2e5bc`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ffd5c4a1`
+   - Active Digits, Text & Separator: `#ff3c3836`
+   - Cardio Load Accent: `#ffcc241d`
+   - Steps Accent: `#ff458588`
+   - Temperature Accent: `#ffb57614`
+   - Battery Gauge Accent: `#ff98971a`
+
+6. **Atelier Savanna Light (`atelier_savanna_light`)**:
+   - Surface Background: `#ffecf4ee`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ffdfe7e2`
+   - Active Digits, Text & Separator: `#ff526057`
+   - Cardio Load Accent: `#ffb16139`
+   - Steps Accent: `#ff478c90`
+   - Temperature Accent: `#ffa07e3b`
+   - Battery Gauge Accent: `#ff489963`
+
 ## 3. Typography
 * **Digital Clock (7-Segment LCD)**: `DSEG7 Classic Bold` (`res/font/dseg7_classic_bold.ttf`).
 * **Metric Numbers (7-Segment LCD)**: `DSEG7 Classic Bold` (`res/font/dseg7_classic_bold.ttf`).
@@ -57,7 +86,7 @@ The watch face supports three selectable color themes via `<ColorConfiguration i
 
 ## 5. User Configurations (`<UserConfigurations>`)
 * **`theme_palette` (ColorConfiguration, default: `gruvbox`)**:
-  - Lets the user pick between **Gruvbox Dark**, **Tokyo Night**, and **Catppuccin Mocha**. Dynamically updates backgrounds, active text, ghost LCD segments, complications, and battery gauge.
+  - Lets the user pick between 6 curated palettes: **Gruvbox Dark**, **Tokyo Night**, **Catppuccin Mocha**, **Tokyo Night Light**, **Gruvbox Light Soft**, and **Atelier Savanna Light**. Dynamically updates backgrounds, active text, ghost LCD segments, complications, and battery gauge.
 * **`native_icons` (Boolean, default: `FALSE`)**:
   - `TRUE`: Uses the dynamic/monochromatic icons provided natively by Fitbit or third-party providers (`[COMPLICATION.MONOCHROMATIC_IMAGE]`), tinted to the slot color.
   - `FALSE` (default): Uses the custom pixel-perfect vector icons designed specifically for this watch face (`ic_heart`, `ic_steps`, `ic_temp`), tinted to the active theme palette.
