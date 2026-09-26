@@ -1,94 +1,98 @@
 <WatchFace width="450" height="450" clipShape="CIRCLE">
-    <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
-    <Metadata key="PREVIEW_TIME" value="10:10:30"/>
+    <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+    <Metadata key="PREVIEW_TIME" value="10:09:30" />
 
-    <!-- Gruvbox Material Dark Background: #282828 -->
     <Scene backgroundColor="#ff282828">
 
-        <!-- ======================================================== -->
-        <!-- TOP METRICS ROW (Heart Rate, Steps, Battery)             -->
-        <!-- ======================================================== -->
-        <Group x="0" y="65" width="450" height="90" name="top_metrics">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <!-- ============================================================ -->
+        <!-- TOP METRICS ROW (Heart Rate, Steps, Battery)                 -->
+        <!-- Fades out in Ambient / AOD mode                              -->
+        <!-- ============================================================ -->
+        <Group name="top_metrics" x="0" y="55" width="450" height="90">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
 
-            <!-- Column 1: Heart Rate (Gruvbox Red #ea6962) -->
-            <PartImage x="80" y="0" width="30" height="30">
-                <Image resource="ic_heart"/>
+            <!-- 1. HEART RATE (Left column: x=40, width=110) -->
+            <PartImage x="83" y="10" width="24" height="24">
+                <Image resource="ic_heart" />
             </PartImage>
-            <PartText x="45" y="38" width="100" height="35">
+            <PartText x="40" y="42" width="110" height="40">
                 <Text align="CENTER">
-                    <Font family="dseg7_classic_bold" size="24" color="#ffd4be98">
-                        <Template>%d</Template>
-                        <Parameter expression="[HEART_RATE] &gt; 0 ? [HEART_RATE] : 72"/>
+                    <Font family="dseg7_classic_bold" size="26" color="#ffea6962">
+                        <Template>%d<Parameter expression="[HEART_RATE]" /></Template>
                     </Font>
                 </Text>
             </PartText>
 
-            <!-- Column 2: Steps (Gruvbox Blue #7daea3) -->
-            <PartImage x="210" y="0" width="30" height="30">
-                <Image resource="ic_steps"/>
+            <!-- 2. STEP COUNT (Center column: x=170, width=110) -->
+            <PartImage x="213" y="10" width="24" height="24">
+                <Image resource="ic_steps" />
             </PartImage>
-            <PartText x="165" y="38" width="120" height="35">
+            <PartText x="170" y="42" width="110" height="40">
                 <Text align="CENTER">
-                    <Font family="dseg7_classic_bold" size="24" color="#ffd4be98">
-                        <Template>%d</Template>
-                        <Parameter expression="[STEP_COUNT]"/>
+                    <Font family="dseg7_classic_bold" size="26" color="#ff7daea3">
+                        <Template>%d<Parameter expression="[STEP_COUNT]" /></Template>
                     </Font>
                 </Text>
             </PartText>
 
-            <!-- Column 3: Battery (Gruvbox Green #a9b665) -->
-            <PartImage x="340" y="0" width="30" height="30">
-                <Image resource="ic_battery"/>
+            <!-- 3. BATTERY (Right column: x=300, width=110) -->
+            <PartImage x="343" y="10" width="24" height="24">
+                <Image resource="ic_battery" />
             </PartImage>
-            <PartText x="295" y="38" width="120" height="35">
+            <PartText x="300" y="42" width="110" height="40">
                 <Text align="CENTER">
-                    <Font family="dseg7_classic_bold" size="24" color="#ffd4be98">
-                        <Template>%d%%</Template>
-                        <Parameter expression="[BATTERY_PERCENT]"/>
+                    <Font family="dseg7_classic_bold" size="26" color="#ffa9b665">
+                        <Template>%d%%<Parameter expression="[BATTERY_PERCENT]" /></Template>
                     </Font>
                 </Text>
             </PartText>
         </Group>
 
-        <!-- ======================================================== -->
-        <!-- CENTER: LCD 7-SEGMENT DIGITAL CLOCK                      -->
-        <!-- ======================================================== -->
-
-        <!-- Inactive Background Segments (Ghost "88:88") for LCD effect -->
-        <PartText x="25" y="168" width="400" height="110">
-            <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <!-- ============================================================ -->
+        <!-- CENTER DIGITAL CLOCK AREA                                    -->
+        <!-- ============================================================ -->
+        <!-- Ghost 88:88 underlay in Gruvbox dark gray (#ff3c3836)        -->
+        <PartText x="25" y="160" width="400" height="130">
             <Text align="CENTER">
-                <Font family="dseg7_classic_bold" size="86" color="#ff32302f">88:88</Font>
+                <Font family="dseg7_classic_bold" size="92" color="#ff3c3836">
+                    <Template>88:88</Template>
+                </Font>
             </Text>
         </PartText>
 
-        <!-- Active Clock Display (Hours & Minutes in Gruvbox Cream/Yellow #d4be98) -->
-        <DigitalClock x="25" y="168" width="400" height="110">
-            <TimeText format="hh:mm" align="CENTER" x="0" y="0" width="400" height="110">
-                <Font family="dseg7_classic_bold" size="86" color="#ffd4be98"/>
+        <!-- Active time display in warm Gruvbox cream (#ffd4be98)        -->
+        <DigitalClock x="25" y="160" width="400" height="130">
+            <TimeText format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="0" width="400" height="130">
+                <Font family="dseg7_classic_bold" size="92" color="#ffd4be98" />
             </TimeText>
         </DigitalClock>
 
-        <!-- ======================================================== -->
-        <!-- HORIZONTAL DIVIDER LINE                                  -->
-        <!-- ======================================================== -->
-        <PartDraw x="90" y="295" width="270" height="4">
-            <Line startX="0" startY="2" endX="270" endY="2">
-                <Stroke color="#ffd4be98" thickness="3" cap="ROUND"/>
+        <!-- ============================================================ -->
+        <!-- SEPARATOR LINE                                               -->
+        <!-- ============================================================ -->
+        <PartDraw x="45" y="295" width="360" height="4">
+            <Line startX="0" startY="2" endX="360" endY="2">
+                <Stroke color="#ffd4be98" thickness="3" cap="ROUND" />
             </Line>
         </PartDraw>
 
-        <!-- ======================================================== -->
-        <!-- BOTTOM: FULL DATE (14-SEGMENT LCD: e.g. "THU FEB 24")    -->
-        <!-- ======================================================== -->
-        <PartText x="25" y="318" width="400" height="60">
+        <!-- ============================================================ -->
+        <!-- BOTTOM DATE AREA (14-segment LCD: DAY_OF_WEEK MONTH DAY)     -->
+        <!-- ============================================================ -->
+        <!-- Ghost underlay for date in Gruvbox dark gray (#ff3c3836)     -->
+        <PartText x="25" y="318" width="400" height="50">
+            <Text align="CENTER">
+                <Font family="dseg14_classic_bold" size="30" color="#ff3c3836">
+                    <Template>~~~ ~~~ ~~</Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Active date text in warm Gruvbox cream (#ffd4be98)           -->
+        <PartText x="25" y="318" width="400" height="50">
             <Text align="CENTER">
                 <Font family="dseg14_classic_bold" size="30" color="#ffd4be98">
-                    <Template>%s %s %02d</Template>
-                    <Parameter expression="[DAY_OF_WEEK_S]"/>
-                    <Parameter expression="[MONTH_S]"/>
-                    <Parameter expression="[DAY]"/>
+                    <Template>%s %s %02d<Parameter expression="[DAY_OF_WEEK_S]" /><Parameter expression="[MONTH_S]" /><Parameter expression="[DAY]" /></Template>
                 </Font>
             </Text>
         </PartText>
