@@ -5,17 +5,40 @@
     <Scene backgroundColor="#ff282828">
 
         <!-- ============================================================ -->
-        <!-- TOP METRICS ROW (Heart Rate, Steps, Battery)                 -->
+        <!-- OUTER CIRCULAR BATTERY GAUGE (10-SEGMENT RING)               -->
+        <!-- Center: (225, 225), Diameter: 430px (Radius: 215px)          -->
+        <!-- Circumference: ~1350.88px -> Slot: ~135.09px                -->
+        <!-- Segment Dash: 123.09px, Gap: 12px                            -->
+        <!-- ============================================================ -->
+        <Group name="circular_battery_gauge" x="0" y="0" width="450" height="450">
+            <!-- 1. Inactive / Ghost 10-segment track (#ff3c3836) -->
+            <PartDraw x="10" y="10" width="430" height="430">
+                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                    <Stroke color="#ff3c3836" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
+                </Arc>
+            </PartDraw>
+
+            <!-- 2. Active battery progress arc (fills proportionally up to 360 deg) -->
+            <PartDraw x="10" y="10" width="430" height="430">
+                <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
+                    <Transform target="endAngle" value="clamp([BATTERY_PERCENT] * 3.6, 0.1, 360)" />
+                    <Stroke color="#ffa9b665" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
+                </Arc>
+            </PartDraw>
+        </Group>
+
+        <!-- ============================================================ -->
+        <!-- TOP METRICS ROW (Heart Rate & Steps - centered 2 columns)    -->
         <!-- Fades out in Ambient / AOD mode                              -->
         <!-- ============================================================ -->
         <Group name="top_metrics" x="0" y="55" width="450" height="90">
             <Variant mode="AMBIENT" target="alpha" value="0" />
 
-            <!-- 1. HEART RATE (Left column: x=40, width=110) -->
-            <PartImage x="83" y="10" width="24" height="24">
+            <!-- 1. HEART RATE (Left column: x=70, width=130) -->
+            <PartImage x="123" y="10" width="24" height="24">
                 <Image resource="ic_heart" />
             </PartImage>
-            <PartText x="40" y="42" width="110" height="40">
+            <PartText x="70" y="42" width="130" height="40">
                 <Text align="CENTER">
                     <Font family="dseg7_classic_bold" size="26" color="#ffea6962">
                         <Template>%d<Parameter expression="[HEART_RATE]" /></Template>
@@ -23,26 +46,14 @@
                 </Text>
             </PartText>
 
-            <!-- 2. STEP COUNT (Center column: x=170, width=110) -->
-            <PartImage x="213" y="10" width="24" height="24">
+            <!-- 2. STEP COUNT (Right column: x=250, width=130) -->
+            <PartImage x="303" y="10" width="24" height="24">
                 <Image resource="ic_steps" />
             </PartImage>
-            <PartText x="170" y="42" width="110" height="40">
+            <PartText x="250" y="42" width="130" height="40">
                 <Text align="CENTER">
                     <Font family="dseg7_classic_bold" size="26" color="#ff7daea3">
                         <Template>%d<Parameter expression="[STEP_COUNT]" /></Template>
-                    </Font>
-                </Text>
-            </PartText>
-
-            <!-- 3. BATTERY (Right column: x=300, width=110) -->
-            <PartImage x="343" y="10" width="24" height="24">
-                <Image resource="ic_battery" />
-            </PartImage>
-            <PartText x="300" y="42" width="110" height="40">
-                <Text align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#ffa9b665">
-                        <Template>%d%%<Parameter expression="[BATTERY_PERCENT]" /></Template>
                     </Font>
                 </Text>
             </PartText>

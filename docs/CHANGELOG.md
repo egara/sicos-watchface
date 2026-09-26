@@ -17,9 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Added open-source `DSEG7 Classic` and `DSEG14 Classic` LCD binary fonts to `res/font/`.
   - Configured authentic Gruvbox Material Dark palette (`#282828` background, `#d4be98` active digits, `#ea6962` red heart, `#7daea3` aqua steps, `#a9b665` green battery).
   - Built inactive LCD segment underlay ("ghost" `88:88` digits and `~~~ ~~~ ~~` date matrix) using `PartText` and `#3c3836` for authentic retro LCD display.
-  - Added top sensor row with custom icons and real-time metrics: Heart Rate (`[HEART_RATE]`), Step Count (`[STEP_COUNT]`), and Battery Percentage (`[BATTERY_PERCENT]%`).
-  - Added separator line and formatted bottom date with 14-segment display (`[DAY_OF_WEEK_S] [MONTH_S] [DAY]`).
-  - Successfully verified live rendering on device with ADB screen capture.
+  - Replaced linear top battery metric with an outer circular 10-segment battery gauge (`<Arc>` with `dashIntervals="123.09 12"`), showing an inactive ghost ring in `#3c3836` and proportional fill in Gruvbox green `#ffa9b665`.
+  - Reorganized top metrics into 2 spacious, centered columns for Heart Rate and Step Count.
+  - Successfully verified live rendering on device with ADB screen capture at both 100% and simulated 25% battery levels.
+
 
 
 

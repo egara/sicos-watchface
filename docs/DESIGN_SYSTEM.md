@@ -18,11 +18,13 @@
 * **Metric Numbers (7-Segment LCD)**: `DSEG7 Classic Bold` (`res/font/dseg7_classic_bold.ttf`).
 * **Date (14-Segment LCD)**: `DSEG14 Classic Bold` (`res/font/dseg14_classic_bold.ttf`).
 
-## 4. Layout & Layers
-* **Top Row (y=65 to 155)**: 3 columns with custom vector icons and real-time sensor metrics:
-  - Heart Rate (`[HEART_RATE]`)
-  - Step Count (`[STEP_COUNT]`)
-  - Battery Percentage (`[BATTERY_PERCENT]%`)
+* **Outer Perimeter (R=215, Diameter=430px)**:
+  - Circular 10-segment battery gauge with 12px gaps (`dashIntervals="123.09 12"`).
+  - Background track: Inactive segments in Gruvbox dark gray (`#ff3c3836`).
+  - Active fill: Dynamic arc filled proportionally up to 360° in Gruvbox green (`#ffa9b665`). (e.g. 25% fills exactly 2.5 segments).
+* **Top Row (y=55 to 145)**: 2 centered columns with custom pixel-art icons and metrics:
+  - Heart Rate (`[HEART_RATE]`) in Gruvbox Red (`#ffea6962`).
+  - Step Count (`[STEP_COUNT]`) in Gruvbox Aqua (`#ff7daea3`).
 * **Center (y=168)**:
   - Underlay: Ghost `88:88` digits.
   - Overlay: Real-time digital clock (`hh:mm`).
