@@ -9,7 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed circular battery gauge progression inaccuracy:
   - Replaced continuous arc with `dashIntervals`/`dashPhase` with 10 discrete `<Arc>` segments.
   - Eliminated phase distortion caused by clipping dynamic `endAngle` over dashed strokes.
-  - Symmetrically aligned segments with gaps centered at 12:00 (0°) and 6:00 (180°), lighting up exactly 1 segment per 10% battery step (e.g. at 90%, 9 segments active, 1 inactive segment remaining).
+  - Symmetrically aligned segments with gaps centered at 12:00 (0°) and 6:00 (180°).
+  - Added continuous proportional progression within each segment via dynamic `<Transform target="endAngle">` (e.g. at 86%, segments 1–8 are 100% full, segment 9 is 60% filled, and segment 10 is inactive).
   - Verified live on Google Pixel Watch 3 with ADB screen captures.
 
 ### Added
