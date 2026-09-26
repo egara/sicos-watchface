@@ -47,6 +47,13 @@
 * **Date Area Tap (Calendar)**: Launches system **Calendar** shortcut (`CALENDAR`).
 
 ## 7. Ambient Mode (Always-On Display - AOD)
-* Top metrics row fades out (`alpha=0`) to save battery and prevent burn-in.
-* Digital clock and date remain visible in high-contrast Gruvbox cream.
+* **Background**: Strict pure black (`#ff000000`) for maximum OLED power efficiency and burn-in prevention.
+* **Preserved Elements**:
+  - Center active digital time (`hh:mm`) in high-contrast Gruvbox cream (`#ffd4be98`).
+  - Inactive LCD "ghost" segments (`88:88`) in dark gray (`#ff3c3836`).
+* **Hidden Elements (`alpha=0`)**:
+  - Outer 10-segment circular battery gauge.
+  - Top 3 complication slots (Cardio Load, Steps, Temperature).
+  - Horizontal separator line.
+  - Bottom alphanumeric date row (both active text and ghost matrix).
 

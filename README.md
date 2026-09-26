@@ -42,8 +42,10 @@ Built entirely using declarative XML with Google's official **Watch Face Format 
 - **Interactive Tap Shortcuts (`<Launch>`)**:
   - **Digital Clock Tap**: Immediately launches the system **Flashlight** application (`com.google.android.clockwork.flashlight`).
   - **Date Matrix Tap**: Opens the system **Calendar / Agenda** app (`CALENDAR`).
-- **Power Efficiency & Always-On Display (AOD)**:
-  - Ambient mode automatically dims sensor row and secondary elements to maximize battery longevity and prevent OLED burn-in.
+- **Power Efficiency & Minimalist Always-On Display (AOD)**:
+  - Strict true black background (`#000000`) for zero OLED power draw on inactive pixels.
+  - Automatically hides all non-essential elements: outer circular battery gauge, all 3 complications, divider line, and bottom date row.
+  - Preserves only the central digital clock (`hh:mm`) and the authentic inactive LCD ghost segments (`88:88`).
 
 ---
 

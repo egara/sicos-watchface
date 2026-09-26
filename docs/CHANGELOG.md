@@ -38,4 +38,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added interactive tap shortcuts (`<Launch>`):
   - Digital clock area triggers system **Flashlight** (`com.google.android.clockwork.flashlight/.FlashlightActivity`).
   - Bottom date area triggers system **Calendar** shortcut (`CALENDAR`).
+- Implemented strict minimalist Always-On Display (AOD / Ambient Mode):
+  - Switched ambient scene background to pure black (`#ff000000`) for maximum OLED energy efficiency.
+  - Automatically hides (`alpha=0`) outer circular battery gauge, all 3 top complications, separator line, and bottom date row.
+  - Preserves only the central digital clock (`hh:mm`) and the retro inactive LCD "ghost" segments (`88:88`).
+
 

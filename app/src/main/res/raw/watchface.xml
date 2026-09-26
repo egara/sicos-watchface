@@ -16,6 +16,7 @@
     </UserConfigurations>
 
     <Scene backgroundColor="#ff282828">
+        <Variant mode="AMBIENT" target="backgroundColor" value="#ff000000" />
 
         <!-- ============================================================ -->
         <!-- OUTER CIRCULAR BATTERY GAUGE (10-SEGMENT RING)               -->
@@ -24,6 +25,7 @@
         <!-- Segment Dash: 123.09px, Gap: 12px                            -->
         <!-- ============================================================ -->
         <Group name="circular_battery_gauge" x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <!-- 1. Inactive / Ghost 10-segment track (#ff3c3836) -->
             <PartDraw x="10" y="10" width="430" height="430">
                 <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
@@ -303,6 +305,7 @@
         <!-- SEPARATOR LINE                                               -->
         <!-- ============================================================ -->
         <PartDraw x="45" y="295" width="360" height="4">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Line startX="0" startY="2" endX="360" endY="2">
                 <Stroke color="#ffd4be98" thickness="3" cap="ROUND" />
             </Line>
@@ -314,6 +317,7 @@
         <!-- ============================================================ -->
         <!-- Ghost underlay for date in Gruvbox dark gray (#ff3c3836)     -->
         <PartText x="25" y="318" width="400" height="50">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Text align="CENTER">
                 <Font family="dseg14_classic_bold" size="30" color="#ff3c3836">
                     <Template>~~~ ~~~ ~~</Template>
@@ -323,6 +327,7 @@
 
         <!-- Active date text in warm Gruvbox cream (#ffd4be98)           -->
         <PartText x="25" y="318" width="400" height="50">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Launch target="CALENDAR" />
             <Text align="CENTER">
                 <Font family="dseg14_classic_bold" size="30" color="#ffd4be98">
