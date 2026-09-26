@@ -21,7 +21,8 @@
 * **Date (14-Segment LCD)**: `DSEG14 Classic Bold` (`res/font/dseg14_classic_bold.ttf`).
 
 * **Outer Perimeter (R=215, Diameter=430px)**:
-  - Circular 10-segment battery gauge with 12px gaps (`dashIntervals="123.09 12"`).
+  - Circular 10-segment battery gauge with 12px gaps (`dashIntervals="123.09 12"` with `dashPhase="61.5"`).
+  - Aligned with 12:00: the first segment begins exactly at the top vertical axis (12 o'clock / 0°), providing perfect vertical symmetry across the 12:00 and 6:00 axes.
   - Background track: Inactive segments in Gruvbox dark gray (`#ff3c3836`).
   - Active fill: Dynamic arc filled proportionally up to 360° in Gruvbox green (`#ffa9b665`). (e.g. 25% fills exactly 2.5 segments).
 * **Top Row (y=55 to 145)**: 3 universal and customizable complication columns (`ComplicationSlot`, `SHORT_TEXT` / `RANGED_VALUE`):

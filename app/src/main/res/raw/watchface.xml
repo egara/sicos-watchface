@@ -42,7 +42,7 @@
                     <!-- 1. Inactive / Ghost 10-segment track (#ff3c3836) -->
                     <PartDraw x="10" y="10" width="430" height="430">
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
-                            <Stroke color="#ff3c3836" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
+                            <Stroke color="#ff3c3836" thickness="8" dashIntervals="123.09 12" dashPhase="61.5" cap="ROUND" />
                         </Arc>
                     </PartDraw>
 
@@ -50,7 +50,7 @@
                     <PartDraw x="10" y="10" width="430" height="430">
                         <Arc centerX="215" centerY="215" width="430" height="430" startAngle="0" endAngle="360" direction="CLOCKWISE">
                             <Transform target="endAngle" value="clamp([BATTERY_PERCENT] * 3.6, 0.1, 360)" />
-                            <Stroke color="#ffa9b665" thickness="8" dashIntervals="123.09 12" dashPhase="6" cap="ROUND" />
+                            <Stroke color="#ffa9b665" thickness="8" dashIntervals="123.09 12" dashPhase="61.5" cap="ROUND" />
                         </Arc>
                     </PartDraw>
                 </Group>

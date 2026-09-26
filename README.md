@@ -26,7 +26,8 @@ Built entirely using declarative XML with Google's official **Watch Face Format 
   - Weather / Temperature accent: `#d8a657` (Gruvbox yellow)
   - Battery gauge fill: `#a9b665` (Gruvbox green)
 - **10-Segment Circular Outer Battery Gauge**:
-  - Outer perimeter gauge (`R=215px`, diameter `430px`) styled with 10 discrete segments (`dashIntervals="123.09 12"`).
+  - Outer perimeter gauge (`R=215px`, diameter `430px`) styled with 10 discrete segments (`dashIntervals="123.09 12"` with `dashPhase="61.5"`).
+  - Aligned with 12:00: the first segment begins exactly at the top vertical axis (12 o'clock / 0°), providing perfect vertical symmetry across the 12:00 and 6:00 axes.
   - Subtle inactive track in `#3c3836` providing authentic hardware-meter feel.
   - Dynamically fills clockwise up to 360° based on actual battery percentage (`[BATTERY_PERCENT]`).
 - **Dynamic & Customizable Complications (Top Row)**:

@@ -46,5 +46,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Supports switching between **Full Display** (`full`, default) and **Time Only / Clean** (`time_only`).
   - In `time_only` mode, conditionally hides outer circular battery gauge, all 3 top complication slots, horizontal separator line, and bottom date row while maintaining the central digital clock and LCD ghost segments.
   - Added localized strings in `res/values/strings.xml` and updated design documentation.
+- Aligned outer 10-segment circular battery gauge with 12:00:
+  - Adjusted `dashPhase="61.5"` on the stroke pattern so that the first segment starts cleanly aligned with the 12 o'clock vertical mark (0°).
+  - Achieved vertical bilateral symmetry with gaps aligned at 12:00 (0°) and 6:00 (180°).
 
 
