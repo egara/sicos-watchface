@@ -9,22 +9,22 @@
             defaultValue="gruvbox">
             <!-- Gruvbox Material Dark -->
             <ColorOption id="gruvbox" displayName="@string/theme_gruvbox_label"
-                colors="#ff282828 #ff3c3836 #ffd4be98 #ffea6962 #ff83a598 #ffd8a657 #ffa9b665" />
+                colors="#ff282828 #ff45403d #ffd4be98 #ffea6962 #ff83a598 #ffd8a657 #ffa9b665" />
             <!-- Tokyo Night -->
             <ColorOption id="tokyo_night" displayName="@string/theme_tokyo_night_label"
-                colors="#ff1a1b26 #ff24283b #ffc0caf5 #fff7768e #ff7aa2f7 #ffe0af68 #ff9ece6a" />
+                colors="#ff1a1b26 #ff2c3146 #ffc0caf5 #fff7768e #ff7aa2f7 #ffe0af68 #ff9ece6a" />
             <!-- Catppuccin Mocha -->
             <ColorOption id="catppuccin_mocha" displayName="@string/theme_catppuccin_mocha_label"
-                colors="#ff1e1e2e #ff313244 #ffcdd6f4 #fff38ba8 #ff89b4fa #fff9e2af #ffa6e3a1" />
+                colors="#ff1e1e2e #ff3a3b4e #ffcdd6f4 #fff38ba8 #ff89b4fa #fff9e2af #ffa6e3a1" />
             <!-- Tokyo Night Light -->
             <ColorOption id="tokyo_night_light" displayName="@string/theme_tokyo_night_light_label"
-                colors="#ffe1e2e7 #ffc8c9ce #ff3760bf #fff52a65 #ff2e7de9 #ff8c6c3e #ff587539" />
+                colors="#ffe1e2e7 #ffbfc0c6 #ff3760bf #fff52a65 #ff2e7de9 #ff8c6c3e #ff587539" />
             <!-- Gruvbox Light Soft -->
             <ColorOption id="gruvbox_light_soft" displayName="@string/theme_gruvbox_light_soft_label"
-                colors="#fff2e5bc #ffd5c4a1 #ff3c3836 #ffcc241d #ff458588 #ffb57614 #ff98971a" />
+                colors="#fff2e5bc #ffcaba9b #ff3c3836 #ffcc241d #ff458588 #ffb57614 #ff98971a" />
             <!-- Atelier Savanna Light -->
             <ColorOption id="atelier_savanna_light" displayName="@string/theme_atelier_savanna_light_label"
-                colors="#ffecf4ee #ffdfe7e2 #ff526057 #ffb16139 #ff478c90 #ffa07e3b #ff489963" />
+                colors="#ffecf4ee #ffd3dbd5 #ff526057 #ffb16139 #ff478c90 #ffa07e3b #ff489963" />
         </ColorConfiguration>
         <BooleanConfiguration
             id="native_icons"

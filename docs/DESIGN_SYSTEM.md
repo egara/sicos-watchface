@@ -11,7 +11,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 ### Dark Themes
 1. **Gruvbox Dark (`gruvbox`, default)**:
    - Surface Background: `#ff282828`
-   - Inactive Segments / Ghost LCD / Battery Track: `#ff3c3836`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ff45403d`
    - Active Digits, Text & Separator: `#ffd4be98`
    - Cardio Load Accent: `#ffea6962`
    - Steps Accent: `#ff83a598`
@@ -20,7 +20,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 
 2. **Tokyo Night (`tokyo_night`)**:
    - Surface Background: `#ff1a1b26`
-   - Inactive Segments / Ghost LCD / Battery Track: `#ff24283b`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ff2c3146`
    - Active Digits, Text & Separator: `#ffc0caf5`
    - Cardio Load Accent: `#fff7768e`
    - Steps Accent: `#ff7aa2f7`
@@ -29,7 +29,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 
 3. **Catppuccin Mocha (`catppuccin_mocha`)**:
    - Surface Background: `#ff1e1e2e`
-   - Inactive Segments / Ghost LCD / Battery Track: `#ff313244`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ff3a3b4e`
    - Active Digits, Text & Separator: `#ffcdd6f4`
    - Cardio Load Accent: `#fff38ba8`
    - Steps Accent: `#ff89b4fa`
@@ -39,7 +39,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 ### Light Themes
 4. **Tokyo Night Light (`tokyo_night_light`)**:
    - Surface Background: `#ffe1e2e7`
-   - Inactive Segments / Ghost LCD / Battery Track: `#ffc8c9ce`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ffbfc0c6`
    - Active Digits, Text & Separator: `#ff3760bf`
    - Cardio Load Accent: `#fff52a65`
    - Steps Accent: `#ff2e7de9`
@@ -48,7 +48,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 
 5. **Gruvbox Light Soft (`gruvbox_light_soft`)**:
    - Surface Background: `#fff2e5bc`
-   - Inactive Segments / Ghost LCD / Battery Track: `#ffd5c4a1`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ffcaba9b`
    - Active Digits, Text & Separator: `#ff3c3836`
    - Cardio Load Accent: `#ffcc241d`
    - Steps Accent: `#ff458588`
@@ -57,7 +57,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 
 6. **Atelier Savanna Light (`atelier_savanna_light`)**:
    - Surface Background: `#ffecf4ee`
-   - Inactive Segments / Ghost LCD / Battery Track: `#ffdfe7e2`
+   - Inactive Segments / Ghost LCD / Battery Track: `#ffd3dbd5`
    - Active Digits, Text & Separator: `#ff526057`
    - Cardio Load Accent: `#ffb16139`
    - Steps Accent: `#ff478c90`

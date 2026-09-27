@@ -17,6 +17,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Watch face display name renamed to **SicOS** (`app_name` string).
+- Enhanced contrast and emphasis of ghost LCD segments and inactive battery track across all 6 theme palettes (`theme_palette` index 1):
+  - Gruvbox Dark: `#3c3836` -> `#45403d` (contrast vs bg: 1.44:1).
+  - Tokyo Night: `#24283b` -> `#2c3146` (contrast vs bg: 1.33:1).
+  - Catppuccin Mocha: `#313244` -> `#3a3b4e` (contrast vs bg: 1.50:1).
+  - Tokyo Night Light: `#c8c9ce` -> `#bfc0c6` (contrast vs bg: 1.40:1).
+  - Gruvbox Light Soft: `#d5c4a1` -> `#caba9b` (contrast vs bg: 1.52:1).
+  - Atelier Savanna Light: `#dfe7e2` -> `#d3dbd5` (contrast vs bg: 1.26:1).
 
 ### Fixed
 - Fixed circular battery gauge progression inaccuracy:
