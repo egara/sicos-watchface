@@ -10,6 +10,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 
 ### Dark Themes
 1. **Gruvbox Dark (`gruvbox`, default)**:
+   <br/><img src="assets/theme_gruvbox.png" width="180" alt="Gruvbox Dark" /><br/>
    - Surface Background: `#ff282828`
    - Inactive Segments / Ghost LCD / Battery Track: `#ff45403d`
    - Active Digits, Text & Separator: `#ffd4be98`
@@ -19,6 +20,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
    - Battery Gauge Accent: `#ffa9b665`
 
 2. **Tokyo Night (`tokyo_night`)**:
+   <br/><img src="assets/theme_tokyo_night.png" width="180" alt="Tokyo Night" /><br/>
    - Surface Background: `#ff1a1b26`
    - Inactive Segments / Ghost LCD / Battery Track: `#ff2c3146`
    - Active Digits, Text & Separator: `#ffc0caf5`
@@ -28,6 +30,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
    - Battery Gauge Accent: `#ff9ece6a`
 
 3. **Catppuccin Mocha (`catppuccin_mocha`)**:
+   <br/><img src="assets/theme_catppuccin_mocha.png" width="180" alt="Catppuccin Mocha" /><br/>
    - Surface Background: `#ff1e1e2e`
    - Inactive Segments / Ghost LCD / Battery Track: `#ff3a3b4e`
    - Active Digits, Text & Separator: `#ffcdd6f4`
@@ -38,6 +41,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
 
 ### Light Themes
 4. **Tokyo Night Light (`tokyo_night_light`)**:
+   <br/><img src="assets/theme_tokyo_night_light.png" width="180" alt="Tokyo Night Light" /><br/>
    - Surface Background: `#ffe1e2e7`
    - Inactive Segments / Ghost LCD / Battery Track: `#ffbfc0c6`
    - Active Digits, Text & Separator: `#ff3760bf`
@@ -47,6 +51,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
    - Battery Gauge Accent: `#ff587539`
 
 5. **Gruvbox Light Soft (`gruvbox_light_soft`)**:
+   <br/><img src="assets/theme_gruvbox_light_soft.png" width="180" alt="Gruvbox Light Soft" /><br/>
    - Surface Background: `#fff2e5bc`
    - Inactive Segments / Ghost LCD / Battery Track: `#ffcaba9b`
    - Active Digits, Text & Separator: `#ff3c3836`
@@ -56,6 +61,7 @@ The watch face supports six selectable color themes via `<ColorConfiguration id=
    - Battery Gauge Accent: `#ff98971a`
 
 6. **Atelier Savanna Light (`atelier_savanna_light`)**:
+   <br/><img src="assets/theme_atelier_savanna_light.png" width="180" alt="Atelier Savanna Light" /><br/>
    - Surface Background: `#ffecf4ee`
    - Inactive Segments / Ghost LCD / Battery Track: `#ffd3dbd5`
    - Active Digits, Text & Separator: `#ff526057`
